@@ -24,8 +24,8 @@ cd kukunochi-gatsby/
 Rename `.env.example` file to `.env.local` and edit this file.
 ```shell
 # .env.local
-SITE_URL=https://example.com
-API_URL=https://api.example.com
+SITE_URL=https://nagoya-forester.or.jp
+API_URL=https://app.nagoya-forester.or.jp
 ```
 ### 3.Start development
 ```shell
