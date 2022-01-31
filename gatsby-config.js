@@ -56,6 +56,7 @@ module.exports = {
     `gatsby-plugin-offline`,
     `gatsby-plugin-lodash`,
     `gatsby-plugin-sitemap`,
+    "gatsby-plugin-robots-txt",
     `gatsby-plugin-preact`,
   ],
 }
