@@ -26,7 +26,7 @@ const Footer = () => {
           spacing={10}
         >
           <Stack align={"flex-start"}>
-            <Text fontWeight="bold" mb={2}>
+            <Text fontWeight="bold" mb={2} as={GatsbyLink} to={"/about/"}>
               私たちについて
             </Text>
             <Link as={GatsbyLink} to={"/about/schedule/"}>
@@ -44,7 +44,7 @@ const Footer = () => {
           </Stack>
 
           <Stack align={"flex-start"}>
-            <Text fontWeight="bold" mb={2}>
+            <Text fontWeight="bold" mb={2} as={GatsbyLink} to={"/event/"}>
               イベント
             </Text>
             <Link as={GatsbyLink} to={"/event/"}>
@@ -56,7 +56,7 @@ const Footer = () => {
           </Stack>
 
           <Stack align={"flex-start"}>
-            <Text fontWeight="bold" mb={2}>
+            <Text fontWeight="bold" mb={2} as={GatsbyLink} to={"/support/"}>
               サポート
             </Text>
             <Link as={GatsbyLink} to={"/support/"}>
@@ -68,7 +68,7 @@ const Footer = () => {
           </Stack>
 
           <Stack align={"flex-start"}>
-            <Text fontWeight="bold" mb={2}>
+            <Text fontWeight="bold" mb={2} as={GatsbyLink} to={"/volunteer/"}>
               ボランティア
             </Text>
             <Link as={GatsbyLink} to={"/volunteer/forestry/"}>
@@ -83,7 +83,7 @@ const Footer = () => {
           </Stack>
 
           <Stack align={"flex-start"}>
-            <Text fontWeight="bold" mb={2}>
+            <Text fontWeight="bold" mb={2} as={GatsbyLink} to={"/education/"}>
               教育
             </Text>
             <Link as={GatsbyLink} to={"/education/sustainable/"}>
@@ -133,7 +133,9 @@ const Footer = () => {
               サイトマップ
             </Link>
           </Stack>
-          <Text>&copy; 2022 NPO法人名古屋シティフォレスター俱楽部</Text>
+          <Box>
+            <Text>&copy; 2022 NPO法人名古屋シティフォレスター俱楽部</Text>
+          </Box>
         </Container>
       </Box>
     </Box>
