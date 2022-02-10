@@ -49,5 +49,6 @@ kukunochi-gatsby
 ## Change schedule
 - Add news page
 - Change Chakra UI
+- Using Typescript
 ## Others
 This site is developed using Windows Subsystem for Linux.
