@@ -7,6 +7,7 @@ This site is built with [Gatsby](https://gatsbyjs.org).
 
 ## 🖥️ System used
 - Gatsby
+  - yarn
 - Drupal
   - Apache
   - MariaDB
