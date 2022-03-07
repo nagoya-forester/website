@@ -150,6 +150,7 @@ const RecordPost = ({ location, data }) => {
       return <ListItem>{processNodes(node.children, transform)}</ListItem>
     }
   }
+
   const options = {
     decodeEntities: true,
     transform,
