@@ -5,6 +5,9 @@ This is the repository for the main [NagoyaForester website](https://nagoya-fore
 
 This site is built with [Gatsby](https://gatsbyjs.org).
 
+## ⛔ Warning
+This version does not work properly.
+
 ## 🖥️ System used
 - Gatsby
   - yarn
