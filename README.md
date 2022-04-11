@@ -9,6 +9,9 @@ This site is built with [Gatsby](https://gatsbyjs.org).
 - Gatsby
   - yarn
   - TypeScript
+- Drupal
+  - Apache
+  - MariaDB
 
 ## 🔰 Development
 
@@ -24,6 +27,14 @@ gatsby new website [GitHub Url]
 
 ```shell
 cd website/
+```
+
+Rename `.env.example` file to `.env.local` and edit this file.
+
+```text
+# .env.local
+SITE_URL=https://nagoya-forester.or.jp
+API_URL=https://app.nagoya-forester.or.jp
 ```
 
 ### 3.Start development
