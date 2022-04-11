@@ -11,7 +11,11 @@ const config: GatsbyConfig = {
     siteUrl: process.env.SITE_URL,
     lang: "ja",
   },
-  plugins: [],
+  plugins: [
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+  ],
 };
 
 export default config;
