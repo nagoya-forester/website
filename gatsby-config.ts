@@ -13,6 +13,7 @@ const config: GatsbyConfig = {
   },
   plugins: [
     `gatsby-plugin-typegen`,
+    `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
