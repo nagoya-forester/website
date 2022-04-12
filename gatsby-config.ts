@@ -12,6 +12,7 @@ const config: GatsbyConfig = {
     lang: "ja",
   },
   plugins: [
+    `gatsby-plugin-typegen`,
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,

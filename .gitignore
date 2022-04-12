@@ -7,3 +7,4 @@ schema.graphql
 .idea/
 .env.*
 yarn.lock
+src/__generated__
