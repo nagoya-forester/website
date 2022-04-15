@@ -1,8 +1,10 @@
-import type { GatsbyConfig } from "gatsby";
-/* eslint @typescript-eslint/no-var-requires: "off" */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require("dotenv").config({
   path: `.env.local`,
 });
+
+import type { GatsbyConfig } from "gatsby";
+
 const config: GatsbyConfig = {
   siteMetadata: {
     title: "NPO法人 名古屋シティフォレスター倶楽部",

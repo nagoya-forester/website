@@ -1,11 +1,12 @@
 import * as React from "react";
+import Layout from "../components/layout";
 
 // markup
 const NotFoundPage = () => {
   return (
-    <>
-      <p>Page</p>
-    </>
+    <Layout>
+      <p>404</p>
+    </Layout>
   );
 };
 

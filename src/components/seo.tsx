@@ -1,33 +1,40 @@
 import * as React from "react";
-import { graphql, useStaticQuery } from "gatsby";
 import { Helmet } from "react-helmet";
-// query
-const { site } = useStaticQuery<GatsbyTypes.SEOQuery>(graphql`
-  query SEO {
-    site {
-      siteMetadata {
-        lang
-        title
-        description
-        siteUrl
-      }
-    }
-  }
-`);
-type SEO = {
+import { graphql, useStaticQuery } from "gatsby";
+
+type Props = {
   PageTitle: string;
+  PageDesc: string;
+  PagePath: string;
 };
 
-// markup
-const Seo = (props: SEO) => {
+const Seo = (props: Props) => {
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          lang
+          title
+          description
+          siteUrl
+        }
+      }
+    }
+  `);
   const title = props.PageTitle
-    ? `${props.PageTitle} | ${site?.siteMetadata?.title}`
-    : site?.siteMetadata?.title;
+    ? `${props.PageTitle} | ${data.site.siteMetadata.title}`
+    : data.site.siteMetadata.title;
+  const description = props.PageDesc || data.site.siteMetadata.description;
+  const url = props.PagePath
+    ? `${data.site.siteMetadata.siteUrl}${props.PagePath}`
+    : data.site.siteMetadata.siteUrl;
   return (
     <Helmet>
       {/* common */}
-      <html lang={site?.siteMetadata?.lang} />
+      <html lang={data.site.siteMetadata.lang} />
       <title>{title}</title>
+      <meta name="description" content={description} />
+      <link rel="canonical" href={url} />
     </Helmet>
   );
 };
