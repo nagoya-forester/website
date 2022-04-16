@@ -5,6 +5,8 @@ import Footer from "./footer";
 import Seo from "./seo";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "../theme";
+import { Global } from "@emotion/react";
+import GlobalStyles from "../theme/styles";
 
 interface Props {
   children: ReactNode;
@@ -14,6 +16,7 @@ interface Props {
 const Layout = ({ children }: Props) => {
   return (
     <ChakraProvider theme={theme}>
+      <Global styles={GlobalStyles} />
       <Seo />
       <Header />
       {children}

@@ -49,7 +49,7 @@ const Header = () => {
               to={"/"}
               mx=".60vw"
               px=".60vw"
-              d="flex"
+              display="flex"
               h="100%"
               alignItems="center"
             >
@@ -62,7 +62,7 @@ const Header = () => {
               to={"/"}
               mx=".60vw"
               px=".60vw"
-              d="flex"
+              display="flex"
               h="100%"
               alignItems="center"
             >
@@ -75,7 +75,7 @@ const Header = () => {
               to={"/"}
               mx=".60vw"
               px=".60vw"
-              d="flex"
+              display="flex"
               h="100%"
               alignItems="center"
             >
@@ -88,7 +88,7 @@ const Header = () => {
               to={"/"}
               mx=".60vw"
               px=".60vw"
-              d="flex"
+              display="flex"
               h="100%"
               alignItems="center"
             >
@@ -101,7 +101,7 @@ const Header = () => {
               to={"/"}
               mx=".60vw"
               px=".60vw"
-              d="flex"
+              display="flex"
               h="100%"
               alignItems="center"
             >
