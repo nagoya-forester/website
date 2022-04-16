@@ -11,10 +11,12 @@
     "typecheck": "tsc --noEmit",
     "lint": "yarn run eslint --ignore-path .gitignore",
     "lint:fix": "yarn run eslint --ignore-path .gitignore --fix",
-    "format": "prettier --write . --ignore-path .gitignore"
+    "format": "prettier --write . --ignore-path .gitignore",
+    "allformat": "yarn lint:fix && yarn format"
   },
   "dependencies": {
     "@chakra-ui/gatsby-plugin": "^2.0.4",
+    "@chakra-ui/icons": "^1.1.7",
     "@chakra-ui/react": "^1.8.8",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
