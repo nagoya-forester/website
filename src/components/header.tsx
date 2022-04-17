@@ -3,7 +3,6 @@ import { Link as GatsbyLink } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import {
   Box,
-  Text,
   Container,
   DrawerBody,
   DrawerCloseButton,
@@ -14,11 +13,18 @@ import {
   Drawer,
   useDisclosure,
   Flex,
+  Stack,
+  DrawerFooter,
+  Text,
+  Input,
 } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, ChevronUpIcon, SearchIcon } from "@chakra-ui/icons";
+import { HeaderLinks, HeaderPickup } from "../data/header_links";
 
 // markup
 const Header = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Box as="header" h={{ base: "60px", md: "70px", lg: "80px" }}>
       <Container
@@ -43,76 +49,87 @@ const Header = () => {
           ml="auto"
           fontWeight="bold"
         >
-          <Box>
-            <Link
-              as={GatsbyLink}
-              to={"/"}
-              mx=".60vw"
-              px=".60vw"
-              display="flex"
-              h="100%"
-              alignItems="center"
-            >
-              ホーム
-            </Link>
-          </Box>
-          <Box>
-            <Link
-              as={GatsbyLink}
-              to={"/"}
-              mx=".60vw"
-              px=".60vw"
-              display="flex"
-              h="100%"
-              alignItems="center"
-            >
-              私たちについて
-            </Link>
-          </Box>
-          <Box>
-            <Link
-              as={GatsbyLink}
-              to={"/"}
-              mx=".60vw"
-              px=".60vw"
-              display="flex"
-              h="100%"
-              alignItems="center"
-            >
-              ブログ
-            </Link>
-          </Box>
-          <Box>
-            <Link
-              as={GatsbyLink}
-              to={"/"}
-              mx=".60vw"
-              px=".60vw"
-              display="flex"
-              h="100%"
-              alignItems="center"
-            >
-              イベント
-            </Link>
-          </Box>
-          <Box>
-            <Link
-              as={GatsbyLink}
-              to={"/"}
-              mx=".60vw"
-              px=".60vw"
-              display="flex"
-              h="100%"
-              alignItems="center"
-            >
-              お問い合わせ
-            </Link>
-          </Box>
+          {HeaderPickup.map((header_pickup) => (
+            <Box key={header_pickup.url}>
+              <Link
+                as={GatsbyLink}
+                to={header_pickup.url}
+                mx=".60vw"
+                px=".60vw"
+                display="flex"
+                h="100%"
+                alignItems="center"
+              >
+                {header_pickup.name}
+              </Link>
+            </Box>
+          ))}
         </Flex>
 
         <Box>
-          <HamburgerMenu />
+          {/* HamburgerMenu */}
+          <Box
+            aria-label="メニュー"
+            as="button"
+            h={{ base: "60px", md: "70px", lg: "80px" }}
+            w={{ base: "60px", md: "70px", lg: "80px" }}
+            onClick={onOpen}
+          >
+            <HamburgerIcon w={7} h={7} />
+            <Box mt={[0.5, 0.5, 1]} fontSize="xs">
+              MENU
+            </Box>
+          </Box>
+          <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
+            <HamburgerMenu />
+          </Drawer>
+          {/* HamburgerMenu End */}
         </Box>
+
+        {/* MobileNavigation */}
+
+        <Container
+          backgroundColor="white"
+          zIndex="docked"
+          display="flex"
+          justifyContent="space-between"
+          position="fixed"
+          bottom={0}
+          width="full"
+          height="56px"
+          left={0}
+          right={0}
+        >
+          <Box aria-label="ページトップに戻る" as="button" h="56px" w="56px">
+            <ChevronUpIcon w={10} h={10} />
+          </Box>
+          <Box
+            aria-label="サイト内検索"
+            as="button"
+            h="56px"
+            w="56px"
+            onClick={onOpen}
+          >
+            <SearchIcon w={5} h={5} />
+            <Box mt={0.5} fontSize="xs">
+              検索
+            </Box>
+          </Box>
+          <Box
+            aria-label="メニュー"
+            as="button"
+            h="56px"
+            w="56px"
+            onClick={onOpen}
+          >
+            <HamburgerIcon w={7} h={7} />
+            <Box mt={0.5} fontSize="xs">
+              MENU
+            </Box>
+          </Box>
+        </Container>
+
+        {/* MobileNavigation End */}
       </Container>
     </Box>
   );
@@ -121,36 +138,62 @@ const Header = () => {
 export default Header;
 
 const HamburgerMenu = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Box
-        aria-label="メニュー"
-        as="button"
-        h={{ base: "60px", md: "70px", lg: "80px" }}
-        w={{ base: "60px", md: "70px", lg: "80px" }}
-        onClick={onOpen}
-      >
-        <HamburgerIcon w={[6, 6, 7]} h={[6, 6, 7]} />
-        <Box mt={[0.5, 0.5, 1]} fontSize="xs">
-          MENU
-        </Box>
-      </Box>
+      <DrawerOverlay />
+      <DrawerContent>
+        <DrawerHeader as="div">
+          <DrawerCloseButton />
+        </DrawerHeader>
 
-      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerHeader as="div">
-            <DrawerCloseButton />
-          </DrawerHeader>
+        <DrawerBody as="nav">
+          <Input my={5} size="lg" placeholder="サイト内検索" />
+          <Stack
+            listStyleType={"none"}
+            as="ul"
+            fontSize="lg"
+            spacing={4}
+            fontWeight="bold"
+          >
+            {HeaderLinks.map((header_links) => (
+              <Box as="li" key={header_links.url}>
+                <Link
+                  display="inline-block"
+                  py={1}
+                  as={GatsbyLink}
+                  to={header_links.url}
+                >
+                  {header_links.name}
+                </Link>
+              </Box>
+            ))}
+          </Stack>
+          {/*
+          <Box>
+            <Text fontWeight="bold" fontSize="lg">
+              ソーシャルメディア
+            </Text>
+          </Box>
+          */}
+          <Stack mt={4} spacing={2}>
+            <Link as={GatsbyLink} to={"/privacy-policy/"}>
+              プライバシーポリシー
+            </Link>
+            <Link as={GatsbyLink} to={"/using/"}>
+              ご利用にあたって
+            </Link>
+            <Link as={GatsbyLink} to={"/sitemap/"}>
+              サイトマップ
+            </Link>
+          </Stack>
+        </DrawerBody>
 
-          <DrawerBody>
-            <Text>waagsgsagassgjpodgsgopsdjgewt;lwetwetweetewtljtwerwergd</Text>
-            <Box height="800px" />
-            <Text>waagsgsagassgjpodgsgopsdjgewt;lwetwetweetewtljtwerwergd</Text>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+        {/*
+        <DrawerFooter as="div">
+          <Text>iogsaghahsg</Text>
+        </DrawerFooter>
+        */}
+      </DrawerContent>
     </>
   );
 };
