@@ -32,7 +32,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         edges {
           node {
             id
-            field_start_time(formatString: "YYYY-MM-DD")
+            drupal_internal__nid
           }
         }
       }
@@ -43,7 +43,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
   record.data.allNodeRecord.edges.forEach((edge) => {
     createPage({
-      path: `/about/record/${edge.node.field_start_time}/`,
+      path: `/about/record/${edge.node.drupal_internal__nid}/`,
       component: path.resolve(`./src/templates/recordpost-templates.js`),
       context: {
         id: edge.node.id,

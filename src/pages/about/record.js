@@ -39,7 +39,7 @@ export const query = graphql`
           field_place
           field_number_participants
           activity_day: field_start_time(formatString: "YYYY年MM月DD日")
-          url: field_start_time(formatString: "YYYY-MM-DD")
+          url: drupal_internal__nid
           title
           field_image {
             alt
