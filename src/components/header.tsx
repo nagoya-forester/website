@@ -14,8 +14,6 @@ import {
   useDisclosure,
   Flex,
   Stack,
-  DrawerFooter,
-  Text,
   Input,
 } from "@chakra-ui/react";
 import { HamburgerIcon, ChevronUpIcon, SearchIcon } from "@chakra-ui/icons";
@@ -91,7 +89,7 @@ const Header = () => {
         <Container
           backgroundColor="white"
           zIndex="docked"
-          display="flex"
+          display={{ base: "flex", md: "none" }}
           justifyContent="space-between"
           position="fixed"
           bottom={0}
@@ -101,7 +99,8 @@ const Header = () => {
           right={0}
         >
           <Box aria-label="ページトップに戻る" as="button" h="56px" w="56px">
-            <ChevronUpIcon w={10} h={10} />
+            <ChevronUpIcon w={8} h={8} />
+            <Box fontSize="xs">先頭へ</Box>
           </Box>
           <Box
             aria-label="サイト内検索"
