@@ -20,6 +20,7 @@ module.exports = {
       options: {
         baseUrl: process.env.API_URL,
         apiBase: `jsonapi`, // optional, defaults to `jsonapi`
+        concurrentFileRequests: 60,
       },
     },
     {
