@@ -46,6 +46,7 @@ const Header = () => {
           display={{ base: "none", md: "none", lg: "flex" }}
           ml="auto"
           fontWeight="bold"
+          pr={5}
         >
           {HeaderPickup.map((header_pickup) => (
             <Box key={header_pickup.url}>
@@ -64,7 +65,22 @@ const Header = () => {
           ))}
         </Flex>
 
-        <Box>
+        <Flex>
+          {/* SearchIcon */}
+          <Box
+            aria-label="サイト内検索"
+            as="button"
+            display={["none", "block", "block", "none", "block"]}
+            h={{ base: "60px", md: "70px", lg: "80px" }}
+            w={{ base: "60px", md: "70px", lg: "80px" }}
+            onClick={onOpen}
+          >
+            <SearchIcon w={6} h={6} />
+            <Box mt={[0.5, 0.5, 1]} fontSize="xs">
+              検索
+            </Box>
+          </Box>
+          {/* SearchIcon End */}
           {/* HamburgerMenu */}
           <Box
             aria-label="メニュー"
@@ -82,7 +98,7 @@ const Header = () => {
             <HamburgerMenu />
           </Drawer>
           {/* HamburgerMenu End */}
-        </Box>
+        </Flex>
 
         {/* MobileNavigation */}
 
