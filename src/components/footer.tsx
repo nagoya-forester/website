@@ -4,11 +4,18 @@ import { Link as GatsbyLink } from "gatsby";
 import {
   Box,
   Container,
+  Flex,
+  HStack,
   Link,
   SimpleGrid,
   Stack,
   Text,
 } from "@chakra-ui/react";
+import { Icon } from "@chakra-ui/icons";
+import { FaTwitter } from "@react-icons/all-files/fa/FaTwitter";
+import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
+import { FaYoutube } from "@react-icons/all-files/fa/FaYoutube";
+import { FaGitlab } from "@react-icons/all-files/fa/FaGitlab";
 
 // markup
 const Footer = () => {
@@ -20,7 +27,26 @@ const Footer = () => {
       color={"gray.700"}
       pb={{ base: "56px", md: "0" }}
     >
-      <Container maxWidth="8xl" pb={10}>
+      <Container maxWidth="9xl" pb={8}>
+        <Stack direction={["column", "row", "row"]} spacing={4}>
+          <Text>私たちをフォロー</Text>
+          <HStack spacing={3}>
+            <Link href="https://twitter.com/nagoya_forester" isExternal>
+              <Icon as={FaTwitter} w={7} h={7} color="logo.twitter" />
+            </Link>
+            <Link href="https://github.com/nagoya-forester" isExternal>
+              <Icon as={FaGithub} w={7} h={7} color="logo.github" />
+            </Link>
+            <Link href="" isExternal>
+              <Icon as={FaYoutube} w={7} h={7} color="logo.youtube" />
+            </Link>
+            <Link href="https://gitlab.com/nagoya-forester" isExternal>
+              <Icon as={FaGitlab} w={7} h={7} color="logo.gitlab" />
+            </Link>
+          </HStack>
+        </Stack>
+      </Container>
+      <Container maxWidth="9xl" pb={10}>
         <SimpleGrid
           columns={{ base: 1, sm: 2, md: 3, lg: 5, xl: 6 }}
           spacing={10}
@@ -111,7 +137,7 @@ const Footer = () => {
       <Box borderTopWidth={1} borderStyle={"solid"} borderColor={"gray.200"}>
         <Container
           as={Stack}
-          maxW={"8xl"}
+          maxW={"9xl"}
           py={4}
           direction={{ base: "column", md: "row" }}
           spacing={4}

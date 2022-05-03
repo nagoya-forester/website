@@ -10,13 +10,24 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Link,
+  Text,
   Drawer,
   useDisclosure,
   Flex,
   Stack,
   Input,
+  HStack,
 } from "@chakra-ui/react";
-import { HamburgerIcon, ChevronUpIcon, SearchIcon } from "@chakra-ui/icons";
+import {
+  HamburgerIcon,
+  ChevronUpIcon,
+  SearchIcon,
+  Icon,
+} from "@chakra-ui/icons";
+import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
+import { FaGitlab } from "@react-icons/all-files/fa/FaGitlab";
+import { FaYoutube } from "@react-icons/all-files/fa/FaYoutube";
+import { FaTwitter } from "@react-icons/all-files/fa/FaTwitter";
 import { HeaderLinks, HeaderPickup } from "../data/header_links";
 
 // markup
@@ -183,13 +194,27 @@ const HamburgerMenu = () => {
               </Box>
             ))}
           </Stack>
-          {/*
-          <Box>
-            <Text fontWeight="bold" fontSize="lg">
+
+          <Box my={5} py={5} borderY={"1px"} borderColor="gray.200">
+            <Text fontSize="lg" fontWeight="bold" mb={3}>
               ソーシャルメディア
             </Text>
+            <HStack spacing={5}>
+              <Link href="https://twitter.com/nagoya_forester" isExternal>
+                <Icon as={FaTwitter} w={8} h={8} color="logo.twitter" />
+              </Link>
+              <Link href="https://github.com/nagoya-forester" isExternal>
+                <Icon as={FaGithub} w={8} h={8} color="logo.github" />
+              </Link>
+              <Link href="" isExternal>
+                <Icon as={FaYoutube} w={8} h={8} color="logo.youtube" />
+              </Link>
+              <Link href="https://gitlab.com/nagoya-forester" isExternal>
+                <Icon as={FaGitlab} w={8} h={8} color="logo.gitlab" />
+              </Link>
+            </HStack>
           </Box>
-          */}
+
           <Stack mt={4} spacing={2}>
             <Link as={GatsbyLink} to={"/privacy-policy/"}>
               プライバシーポリシー

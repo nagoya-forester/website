@@ -7,6 +7,12 @@ const theme = extendTheme({
       200: "#1E50B5",
       300: "#11AC51",
     },
+    logo: {
+      twitter: "#1DA1F2",
+      youtube: "#FF0000",
+      gitlab: "#000000",
+      github: "#24292f",
+    },
   },
   sizes: {
     "9xl": "100rem",
