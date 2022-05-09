@@ -6,6 +6,7 @@ type Props = {
   PageTitle: string;
   PageDesc: string;
   PagePath: string;
+  PageNoindex: boolean;
 };
 
 const Seo = (props: Props) => {
@@ -28,6 +29,7 @@ const Seo = (props: Props) => {
   const url = props.PagePath
     ? `${data.site.siteMetadata.siteUrl}${props.PagePath}`
     : data.site.siteMetadata.siteUrl;
+  const noindex = props.PageNoindex;
   return (
     <Helmet>
       {/* common */}
@@ -35,6 +37,8 @@ const Seo = (props: Props) => {
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />
+      {/* index */}
+      {noindex && <meta name="robots" content="noindex" />}
     </Helmet>
   );
 };
