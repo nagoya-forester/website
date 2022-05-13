@@ -23,7 +23,7 @@ import { HamburgerIcon } from "@chakra-ui/icons"
 const Header = () => {
   return (
     <Box as="header" h={{ base: "60px", md: "70px", lg: "80px" }}>
-      <Container maxWidth="8xl" d="flex" justify="space-between">
+      <Container maxWidth="8xl" display="flex" justify="space-between">
         <Box w={{ base: "240px", md: "280px", lg: "320px" }} mr="auto">
           <Link as={GatsbyLink} to={"/"} d="flex">
             <StaticImage
@@ -38,7 +38,7 @@ const Header = () => {
         </Box>
 
         <Flex
-          d={{ base: "none", md: "none", lg: "flex" }}
+          display={{ base: "none", md: "none", lg: "flex" }}
           ml="auto"
           fontWeight="bold"
         >
@@ -48,7 +48,7 @@ const Header = () => {
               to={"/"}
               mx=".60vw"
               px=".60vw"
-              d="flex"
+              display="flex"
               h="100%"
               alignItems="center"
             >
@@ -61,7 +61,7 @@ const Header = () => {
               to={"/about/"}
               mx=".60vw"
               px=".60vw"
-              d="flex"
+              display="flex"
               h="100%"
               alignItems="center"
             >
@@ -74,7 +74,7 @@ const Header = () => {
               to={"/blog/"}
               mx=".60vw"
               px=".60vw"
-              d="flex"
+              display="flex"
               h="100%"
               alignItems="center"
             >
@@ -87,7 +87,7 @@ const Header = () => {
               to={"/event/"}
               mx=".60vw"
               px=".60vw"
-              d="flex"
+              display="flex"
               h="100%"
               alignItems="center"
             >
@@ -100,7 +100,7 @@ const Header = () => {
               to={"/contact/"}
               mx=".60vw"
               px=".60vw"
-              d="flex"
+              display="flex"
               h="100%"
               alignItems="center"
             >
