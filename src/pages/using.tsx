@@ -21,7 +21,7 @@ const Using = () => {
         PageTitle="ご利用にあたって"
         PageDesc="NPO法人名古屋シティフォレスター俱楽部WEBサイト利用に関する情報を記載しています。"
         PagePath={""}
-        PageNoindex={true}
+        PageNoindex={false}
       />
 
       <Box as="main" mt={4} mb={10}>

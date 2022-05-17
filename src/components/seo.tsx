@@ -18,6 +18,7 @@ const Seo = (props: Props) => {
           title
           description
           siteUrl
+          locale
         }
       }
     }
@@ -39,6 +40,13 @@ const Seo = (props: Props) => {
       <link rel="canonical" href={url} />
       {/* index */}
       {noindex && <meta name="robots" content="noindex" />}
+      {/* OGP */}
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content={data.site.siteMetadata.title} />
+      <meta property="og:locale" content={data.site.siteMetadata.locale} />
+      <meta property="og:title" content={title} />
+      <meta property="og:url" content={url} />
+      <meta property="og:description" content={description} />
     </Helmet>
   );
 };

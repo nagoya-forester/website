@@ -25,6 +25,7 @@ export const query = graphql`
         node {
           id
           title
+          created(formatString: "YYYY年MM月DD日HH時mm分")
           field_image {
             alt
           }
@@ -50,17 +51,18 @@ export const query = graphql`
 `;
 type Props = {
   data: GatsbyTypes.BlogIndexQuery;
+  location: Location;
 };
 
 // markup
-const Blog = ({ data }: Props) => {
+const Blog = ({ location, data }: Props) => {
   return (
     <Layout>
       <Seo
         PageTitle="ブログ"
         PageDesc="NPO法人名古屋シティフォレスター俱楽部の活動での知識や技術を記載しています。"
-        PagePath={""}
-        PageNoindex={true}
+        PagePath={location.pathname}
+        PageNoindex={false}
       />
 
       <Box as="main" mt={4} mb={10}>
@@ -88,13 +90,13 @@ const Blog = ({ data }: Props) => {
           </Container>
 
           <Container mt={16} maxW="8xl">
-            <SimpleGrid columns={[2, 3, 4, 5, 5]} spacing={6}>
+            <SimpleGrid columns={[2, 3, 4, 5, 5]} spacing={[3, 3, 4, 4, 5]}>
               {data.allNodeBlog?.edges.map(({ node }) => (
                 <LinkBox
                   key={node.id}
                   as="article"
                   borderRadius="md"
-                  p="5"
+                  p={[2, 3, 4, 4, 5]}
                   maxW="320px"
                   borderWidth="1px"
                 >
@@ -111,6 +113,7 @@ const Blog = ({ data }: Props) => {
                       <StaticImage
                         src="../images/no-image.webp"
                         alt="NoImage"
+                        aspectRatio={1.618}
                         placeholder="blurred"
                         layout="constrained"
                       />
@@ -123,7 +126,7 @@ const Blog = ({ data }: Props) => {
                   </Heading>
                   <Box mt={1}>
                     <Text fontSize="xs" as="time">
-                      200202020
+                      {node.created}
                     </Text>
                   </Box>
                 </LinkBox>
