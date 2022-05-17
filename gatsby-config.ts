@@ -26,6 +26,13 @@ const config: GatsbyConfig = {
         isUsingColorMode: false,
       },
     },
+    {
+      resolve: `gatsby-source-drupal`,
+      options: {
+        baseUrl: process.env.API_URL,
+        apiBase: `jsonapi`,
+      },
+    },
   ],
 };
 
