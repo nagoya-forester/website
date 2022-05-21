@@ -7,7 +7,7 @@ type Props = {
   PageDesc: string;
   PagePath: string;
   PageNoindex: boolean;
-  SchemaMarkup: never;
+  PageSchema: any;
 };
 
 const Seo = (props: Props) => {
@@ -32,7 +32,15 @@ const Seo = (props: Props) => {
     ? `${data.site.siteMetadata.siteUrl}${props.PagePath}`
     : data.site.siteMetadata.siteUrl;
   const noindex = props.PageNoindex;
-  const schema = props.SchemaMarkup;
+  const PageSchema = props.PageSchema;
+  const default_schema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: data.site.siteMetadata.title,
+    url: data.site.siteMetadata.siteUrl,
+    logo: data.site.siteMetadata.siteUrl + "/icon-512.png",
+    sameAs: data.site.siteMetadata.siteUrl,
+  };
   //
   return (
     <Helmet>
@@ -44,7 +52,10 @@ const Seo = (props: Props) => {
       {/* index */}
       {noindex && <meta name="robots" content="noindex" />}
       {/* schema.org */}
-      <script type="application/ld+json">{JSON.stringify(schema)}</script>
+      <script type="application/ld+json">
+        {JSON.stringify(default_schema)}
+      </script>
+      <script type="application/ld+json">{JSON.stringify(PageSchema)}</script>
       {/* OGP */}
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={data.site.siteMetadata.title} />

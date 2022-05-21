@@ -47,6 +47,11 @@ export const query = graphql`
         }
       }
     }
+    site {
+      siteMetadata {
+        siteUrl
+      }
+    }
   }
 `;
 type Props = {
@@ -56,6 +61,24 @@ type Props = {
 
 // markup
 const Blog = ({ location, data }: Props) => {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "ホーム",
+        item: data.site?.siteMetadata?.siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "ブログ",
+        item: data.site?.siteMetadata?.siteUrl + "/blog/",
+      },
+    ],
+  };
   return (
     <Layout>
       <Seo
@@ -63,6 +86,7 @@ const Blog = ({ location, data }: Props) => {
         PageDesc="NPO法人名古屋シティフォレスター俱楽部の活動での知識や技術を記載しています。"
         PagePath={location.pathname}
         PageNoindex={false}
+        PageSchema={schema}
       />
 
       <Box as="main" mt={4} mb={10}>
