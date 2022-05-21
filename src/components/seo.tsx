@@ -7,6 +7,7 @@ type Props = {
   PageDesc: string;
   PagePath: string;
   PageNoindex: boolean;
+  SchemaMarkup: never;
 };
 
 const Seo = (props: Props) => {
@@ -31,6 +32,8 @@ const Seo = (props: Props) => {
     ? `${data.site.siteMetadata.siteUrl}${props.PagePath}`
     : data.site.siteMetadata.siteUrl;
   const noindex = props.PageNoindex;
+  const schema = props.SchemaMarkup;
+  //
   return (
     <Helmet>
       {/* common */}
@@ -40,6 +43,8 @@ const Seo = (props: Props) => {
       <link rel="canonical" href={url} />
       {/* index */}
       {noindex && <meta name="robots" content="noindex" />}
+      {/* schema.org */}
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
       {/* OGP */}
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={data.site.siteMetadata.title} />
@@ -47,6 +52,9 @@ const Seo = (props: Props) => {
       <meta property="og:title" content={title} />
       <meta property="og:url" content={url} />
       <meta property="og:description" content={description} />
+      {/* favicon */}
+      <link rel="icon" href="/favicon.ico" sizes="any" />
+      <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     </Helmet>
   );
 };
