@@ -101,7 +101,7 @@ const Footer = () => {
               森林・林業ボランティア
             </Link>
             <Link as={GatsbyLink} to={"/volunteer/environment/"}>
-              環境
+              環境ボランティア
             </Link>
             <Link as={GatsbyLink} to={"/volunteer/safety/"}>
               安全について
@@ -121,7 +121,7 @@ const Footer = () => {
           </Stack>
 
           <Stack>
-            <Link fontWeight="bold" as={GatsbyLink} to={"/"}>
+            <Link fontWeight="bold" as={GatsbyLink} to={"/news/"}>
               お知らせ
             </Link>
             <Link fontWeight="bold" as={GatsbyLink} to={"/admission/"}>

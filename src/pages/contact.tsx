@@ -1,33 +1,60 @@
 import * as React from "react";
 import Layout from "../components/layout";
+import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
 import Seo from "../components/seo";
 import {
   Box,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-  Button,
   Container,
-  Heading,
   Text,
+  Heading,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import { Link as GatsbyLink } from "gatsby";
 
 type Props = {
   location: Location;
 };
 // markup
-const NotFoundPage = ({ location }: Props) => {
+const Contact = ({ location }: Props) => {
+  const { site } = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          siteUrl
+        }
+      }
+    }
+  `);
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "ホーム",
+        item: site.siteMetadata.siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "お問い合わせ",
+        item: site.siteMetadata.siteUrl + "/contact/",
+      },
+    ],
+  };
   return (
     <Layout>
       <Seo
-        PageTitle="404 Not Found"
-        PageDesc={""}
+        PageTitle="お問い合わせ"
+        PageDesc="NPO法人名古屋シティフォレスター俱楽部に関するお問い合わせはこちらからお問い合わせください。"
         PagePath={location.pathname}
         PageNoindex={false}
-        PageSchema={""}
+        PageSchema={schema}
       />
+
       <Box as="main" mt={4} mb={10}>
         <Box as="article">
           <Container as="header" maxW={"6xl"}>
@@ -42,44 +69,24 @@ const NotFoundPage = ({ location }: Props) => {
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbItem isCurrentPage>
-                <BreadcrumbLink as={GatsbyLink} to={"/404/"}>
-                  404 Not Found
+                <BreadcrumbLink as={GatsbyLink} to={"/contact/"}>
+                  お問い合わせ
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </Breadcrumb>
             <Heading fontSize={"5xl"} as="h1">
-              404 Not Found
+              お問い合わせ
             </Heading>
           </Container>
 
           <Container mt={16} maxW="fit-content">
             <Box maxW={"3xl"}>
               <Heading mt={16} mb={2} fontSize={"4xl"} as="h2">
-                ページが見つかりません
+                直接のお問い合わせ
               </Heading>
-              <Text mt={5}>
-                いつもNPO法人名古屋シティフォレスター俱楽部ウェブサイトをご利用いただきありがとうございます。
-                <br />
-                アクセスしようとしたURLが変更されているため、見つけることができません。
-                <br />
-                お手数ですが、以下の方法でページをお探しください。
-              </Text>
-              <Heading mt={16} mb={2} fontSize={"4xl"} as="h2">
-                サイト内検索で探す
-              </Heading>
-              <Heading mt={16} mb={2} fontSize={"4xl"} as="h2">
-                サイトマップで探す
-              </Heading>
-              <Button
-                mt={5}
-                as={GatsbyLink}
-                to={"/sitemap/"}
-                size="lg"
-                colorScheme="blue"
-                fontWeight="bold"
-              >
-                サイトマップ
-              </Button>
+              <Text mt={5}>mail:</Text>
+              <Text mt={5}>ncfc51yamada@gmail.com</Text>
+              <Text mt={5}>理事長 山田 均</Text>
             </Box>
           </Container>
 
@@ -90,4 +97,4 @@ const NotFoundPage = ({ location }: Props) => {
   );
 };
 
-export default NotFoundPage;
+export default Contact;

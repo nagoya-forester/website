@@ -13,8 +13,8 @@ import {
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { graphql, Link as GatsbyLink } from "gatsby";
-import Layout from "../components/layout";
-import Seo from "../components/seo";
+import Layout from "../../components/layout";
+import Seo from "../../components/seo";
 import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
 
 // query
