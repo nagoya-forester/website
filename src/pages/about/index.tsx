@@ -18,7 +18,7 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import { ChevronRightIcon, LinkIcon } from "@chakra-ui/icons";
-import { Link as GatsbyLink } from "gatsby";
+import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 
 type Props = {
@@ -26,6 +26,33 @@ type Props = {
 };
 // markup
 const About = ({ location }: Props) => {
+  const { site } = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          siteUrl
+        }
+      }
+    }
+  `);
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "ホーム",
+        item: site.siteMetadata.siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "私たちについて",
+        item: site.siteMetadata.siteUrl + "/about/",
+      },
+    ],
+  };
   return (
     <Layout>
       <Seo
@@ -33,6 +60,7 @@ const About = ({ location }: Props) => {
         PageDesc="NPO法人名古屋シティフォレスター俱楽部の団体についての情報を紹介しています。"
         PagePath={location.pathname}
         PageNoindex={false}
+        PageSchema={schema}
       />
 
       <Box as="main" mt={4} mb={10}>
