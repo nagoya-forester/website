@@ -135,7 +135,7 @@ const Blog = ({ location, data }: Props) => {
                       />
                     ) : (
                       <StaticImage
-                        src="../images/no-image.webp"
+                        src="../../images/no-image.webp"
                         alt="NoImage"
                         aspectRatio={1.618}
                         placeholder="blurred"
