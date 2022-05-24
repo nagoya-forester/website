@@ -206,7 +206,10 @@ const HamburgerMenu = () => {
               <Link href="https://github.com/nagoya-forester" isExternal>
                 <Icon as={FaGithub} w={8} h={8} color="logo.github" />
               </Link>
-              <Link href="" isExternal>
+              <Link
+                href="https://www.youtube.com/channel/UCBgEHLLEbfyKDyLvZuxHbRA"
+                isExternal
+              >
                 <Icon as={FaYoutube} w={8} h={8} color="logo.youtube" />
               </Link>
               <Link href="https://gitlab.com/nagoya-forester" isExternal>

@@ -155,10 +155,7 @@ const About = ({ location }: Props) => {
             <SimpleGrid columns={[1, 1, 2]} spacingX="2rem" spacingY="3rem">
               <VStack justify="center" order={[1, 1, 2]}>
                 <Heading textAlign="center" fontSize={"3xl"} as="h3">
-                  {
-                    // FIXME リンク修正
-                  }
-                  <Link as={GatsbyLink} to={"/about/info/"}>
+                  <Link as={GatsbyLink} to={"/support/"}>
                     森林の保護と成長
                     <LinkIcon w={5} h={5} color="digital.300" />
                   </Link>
@@ -183,10 +180,7 @@ const About = ({ location }: Props) => {
 
               <VStack justify="center" order={3}>
                 <Heading textAlign="center" fontSize={"3xl"} as="h3">
-                  {
-                    // FIXME リンク修正
-                  }
-                  <Link as={GatsbyLink} to={"/about/info/"}>
+                  <Link as={GatsbyLink} to={"/education/sustainable/"}>
                     人と森林
                     <LinkIcon w={5} h={5} color="digital.300" />
                   </Link>
@@ -206,10 +200,7 @@ const About = ({ location }: Props) => {
 
               <VStack justify="center" order={[5, 5, 6]}>
                 <Heading textAlign="center" fontSize={"3xl"} as="h3">
-                  {
-                    // FIXME リンク修正
-                  }
-                  <Link as={GatsbyLink} to={"/about/info/"}>
+                  <Link as={GatsbyLink} to={"/education/environmental/"}>
                     森林の理解
                     <LinkIcon w={5} h={5} color="digital.300" />
                   </Link>

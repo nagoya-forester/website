@@ -6,6 +6,7 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   Container,
+  Text,
   Heading,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
@@ -88,11 +89,13 @@ const Sustainable = ({ location }: Props) => {
               持続可能な森林
             </Heading>
           </Container>
-          {
-            // FIXME ここに教育を追加
-          }
+
           <Container mt={16} maxW="fit-content">
-            <Box maxW={"3xl"}></Box>
+            <Box maxW={"3xl"}>
+              <Text mt={5}>
+                間伐や除伐を行った後に、特定の地域を設け、その後の新たな植物の生育状況や切り株から発生した萌芽状況を管理・観察し、持続可能な森林となるような活動を行っています。
+              </Text>
+            </Box>
           </Container>
 
           <Box as="footer" />

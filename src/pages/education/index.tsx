@@ -7,6 +7,10 @@ import {
   BreadcrumbLink,
   Container,
   Heading,
+  LinkBox,
+  LinkOverlay,
+  Stack,
+  Text,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import Layout from "../../components/layout";
@@ -77,11 +81,48 @@ const Education = ({ location }: Props) => {
               教育
             </Heading>
           </Container>
-          {
-            // FIXME ここに教育を追加
-          }
+
           <Container mt={16} maxW="fit-content">
-            <Box maxW={"3xl"}></Box>
+            <Box maxW={"3xl"}>
+              <Stack direction={"column"} spacing={8} mt={16}>
+                <LinkBox
+                  as="article"
+                  p="5"
+                  borderWidth="2px"
+                  rounded="md"
+                  backgroundColor={"gray.100"}
+                >
+                  <Heading my="2">
+                    <LinkOverlay as={GatsbyLink} to={"/education/sustainable/"}>
+                      持続可能な森林
+                    </LinkOverlay>
+                  </Heading>
+                  <Text>
+                    -------------------------------------------------------------------------
+                  </Text>
+                </LinkBox>
+
+                <LinkBox
+                  as="article"
+                  p="5"
+                  borderWidth="2px"
+                  rounded="md"
+                  backgroundColor={"gray.100"}
+                >
+                  <Heading my="2">
+                    <LinkOverlay
+                      as={GatsbyLink}
+                      to={"/education/environmental/"}
+                    >
+                      環境教育
+                    </LinkOverlay>
+                  </Heading>
+                  <Text>
+                    -------------------------------------------------------------------------
+                  </Text>
+                </LinkBox>
+              </Stack>
+            </Box>
           </Container>
 
           <Box as="footer" />

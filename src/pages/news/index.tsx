@@ -51,7 +51,7 @@ const News = ({ location }: Props) => {
         PageTitle="お知らせ"
         PageDesc="NPO法人名古屋シティフォレスター倶楽部のお知らせを記載しています。"
         PagePath={location.pathname}
-        PageNoindex={false}
+        PageNoindex={true}
         PageSchema={schema}
       />
 

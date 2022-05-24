@@ -7,6 +7,7 @@ import {
   BreadcrumbLink,
   Container,
   Heading,
+  Text,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import Layout from "../../components/layout";
@@ -54,7 +55,7 @@ const Environment = ({ location }: Props) => {
     <Layout>
       <Seo
         PageTitle="環境ボランティア"
-        PageDesc=""
+        PageDesc="環境ページ"
         PagePath={location.pathname}
         PageNoindex={false}
         PageSchema={schema}
@@ -90,7 +91,11 @@ const Environment = ({ location }: Props) => {
           </Container>
 
           <Container mt={16} maxW="fit-content">
-            <Box maxW={"3xl"}></Box>
+            <Box maxW={"3xl"}>
+              <Text mt={5}>
+                豊田市内の自治体が行う地域の花や緑の育成・整備活動に参加し、その一環として除伐や間伐などの活動を行っています。
+              </Text>
+            </Box>
           </Container>
 
           <Box as="footer" />
