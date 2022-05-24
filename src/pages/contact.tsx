@@ -89,7 +89,6 @@ const Contact = ({ location }: Props) => {
               <Text mt={5}>理事長 山田 均</Text>
             </Box>
           </Container>
-
           <Box as="footer" />
         </Box>
       </Box>

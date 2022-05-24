@@ -1,4 +1,4 @@
-# **NagoyaForester Website**
+# **NagoyaCityForesterClub Website**
 
 This is the repository for the main [NagoyaForester website](https://nagoya-forester.or.jp).
 
