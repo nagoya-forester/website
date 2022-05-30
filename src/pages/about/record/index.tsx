@@ -1,5 +1,5 @@
 import * as React from "react";
-import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
+import { graphql, Link as GatsbyLink } from "gatsby";
 import {
   Badge,
   Box,
@@ -7,11 +7,11 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   Container,
-  Flex,
   Heading,
   LinkBox,
   LinkOverlay,
   SimpleGrid,
+  Stack,
   Tag,
   TagLabel,
   TagLeftIcon,
@@ -28,10 +28,6 @@ import Layout from "../../../components/layout";
 import Seo from "../../../components/seo";
 import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
 
-type Props = {
-  data: GatsbyTypes.RecordIndexQuery;
-  location: Location;
-};
 // query
 export const query = graphql`
   query RecordIndex {
@@ -66,19 +62,19 @@ export const query = graphql`
         }
       }
     }
-  }
-`;
-// markup
-const Record = ({ location, data }: Props) => {
-  const { site } = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          siteUrl
-        }
+    site {
+      siteMetadata {
+        siteUrl
       }
     }
-  `);
+  }
+`;
+type Props = {
+  data: GatsbyTypes.RecordIndexQuery;
+  location: Location;
+};
+// markup
+const Record = ({ location, data }: Props) => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -87,19 +83,19 @@ const Record = ({ location, data }: Props) => {
         "@type": "ListItem",
         position: 1,
         name: "ホーム",
-        item: site.siteMetadata.siteUrl,
+        item: data.site?.siteMetadata?.siteUrl,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "私たちについて",
-        item: site.siteMetadata.siteUrl + "/about/",
+        item: data.site?.siteMetadata?.siteUrl + "/about/",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: "活動記録",
-        item: site.siteMetadata.siteUrl + "/about/record/",
+        item: data.site?.siteMetadata?.siteUrl + "/about/record/",
       },
     ],
   };
@@ -114,8 +110,8 @@ const Record = ({ location, data }: Props) => {
       />
 
       <Box as="main" mt={4} mb={10}>
-        <Box as="article">
-          <Container as="header" maxW={"6xl"}>
+        <Box>
+          <Container maxW={"8xl"}>
             <Breadcrumb
               mb={3.5}
               spacing="8px"
@@ -142,19 +138,13 @@ const Record = ({ location, data }: Props) => {
             </Heading>
           </Container>
 
-          <Flex
-            justifyContent={"center"}
-            maxW={"5xl"}
-            mt={16}
-            mb={2}
-            mx={"auto"}
-          >
-            <SimpleGrid columns={[1, 1, 2, 3]} spacing={6}>
+          <Container mt={16} maxW="8xl">
+            <SimpleGrid columns={[2, 3, 4, 5, 5]} spacing={[3, 3, 4, 4, 5]}>
               {data.allNodeRecord?.edges.map(({ node }) => (
                 <LinkBox
                   as="article"
                   borderRadius="md"
-                  p="5"
+                  p={[2, 3, 4, 4, 5]}
                   maxW="320px"
                   borderWidth="1px"
                   key={node.id}
@@ -164,9 +154,9 @@ const Record = ({ location, data }: Props) => {
                       <GatsbyImage
                         image={
                           node.relationships.field_image.localFile
-                            .childImageSharp.gatsbyImageData as never
+                            ?.childImageSharp?.gatsbyImageData
                         }
-                        alt={node.field_image.alt}
+                        alt={node.field_image?.alt || ""}
                       />
                     ) : (
                       <StaticImage
@@ -178,7 +168,7 @@ const Record = ({ location, data }: Props) => {
                       />
                     )}
                   </Box>
-                  <Flex align="baseline" mt={2}>
+                  <Stack direction={["column", "column", "row"]} mt={2}>
                     <Badge colorScheme="blue">場所</Badge>
                     <Text
                       ml={2}
@@ -189,7 +179,7 @@ const Record = ({ location, data }: Props) => {
                     >
                       {node.field_place}
                     </Text>
-                  </Flex>
+                  </Stack>
                   <Heading as="h2" mt={2} fontSize="xl">
                     <LinkOverlay
                       as={GatsbyLink}
@@ -199,35 +189,31 @@ const Record = ({ location, data }: Props) => {
                     </LinkOverlay>
                   </Heading>
                   <VStack mt={4} spacing={2} align="stretch">
-                    <Flex align="center">
-                      <Tag>
+                    <Stack direction={["column", "column", "column", "row"]}>
+                      <Tag minW="78px">
                         <TagLeftIcon boxSize="12px" as={CalendarIcon} />
                         <TagLabel>活動日</TagLabel>
                       </Tag>
                       <Text ml={3}>{node.activity_day}</Text>
-                    </Flex>
-                    <Flex align="center">
+                    </Stack>
+                    <Stack direction={["column", "column", "row"]}>
                       <Tag>
                         <TagLeftIcon boxSize="12px" as={AddIcon} />
                         <TagLabel>参加人数</TagLabel>
                       </Tag>
                       <Text ml={3}>{node.field_number_participants}人</Text>
-                    </Flex>
-                    <Flex align="center">
+                    </Stack>
+                    <Stack direction={["column", "column", "row"]}>
                       <Tag>
                         <TagLeftIcon boxSize="12px" as={SunIcon} />
                         <TagLabel>天候</TagLabel>
                       </Tag>
                       <Text ml={3}>{node.field_weather}</Text>
-                    </Flex>
+                    </Stack>
                   </VStack>
                 </LinkBox>
               ))}
             </SimpleGrid>
-          </Flex>
-
-          <Container mt={16} maxW="fit-content">
-            <Box maxW={"3xl"}></Box>
           </Container>
         </Box>
       </Box>

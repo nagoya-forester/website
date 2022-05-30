@@ -6,27 +6,69 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   Container,
+  Flex,
   Heading,
+  LinkBox,
+  LinkOverlay,
+  SimpleGrid,
+  Tag,
+  TagLabel,
+  TagLeftIcon,
   Text,
+  VStack,
 } from "@chakra-ui/react";
-import { ChevronRightIcon } from "@chakra-ui/icons";
+import { AtSignIcon, CalendarIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import Layout from "../../components/layout";
 import Seo from "../../components/seo";
+import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
 
-type Props = {
-  location: Location;
-};
-// markup
-const Event = ({ location }: Props) => {
-  const { site } = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          siteUrl
+// query
+export const query = graphql`
+  query EventIndex {
+    allNodeEvent(sort: { fields: field_start_time, order: DESC }) {
+      edges {
+        node {
+          drupal_id
+          id
+          title
+          ufl: field_start_time(formatString: "YYYY-MM-DD")
+          field_start_time(formatString: "YYYY年MM月DD日HH時mm分")
+          field_end_time(formatString: "YYYY年MM月DD日HH時mm分")
+          field_image {
+            alt
+          }
+          field_location
+          relationships {
+            field_image {
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(
+                    layout: FULL_WIDTH
+                    formats: WEBP
+                    aspectRatio: 1.618
+                    placeholder: BLURRED
+                    transformOptions: { fit: COVER }
+                  )
+                }
+              }
+            }
+          }
         }
       }
     }
-  `);
+    site {
+      siteMetadata {
+        siteUrl
+      }
+    }
+  }
+`;
+type Props = {
+  data: GatsbyTypes.EventIndexQuery;
+  location: Location;
+};
+// markup
+const Event = ({ location, data }: Props) => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -35,13 +77,13 @@ const Event = ({ location }: Props) => {
         "@type": "ListItem",
         position: 1,
         name: "ホーム",
-        item: site.siteMetadata.siteUrl,
+        item: data.site?.siteMetadata?.siteUrl,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "イベント",
-        item: site.siteMetadata.siteUrl + "/event/",
+        item: data.site?.siteMetadata?.siteUrl + "/event/",
       },
     ],
   };
@@ -56,8 +98,8 @@ const Event = ({ location }: Props) => {
       />
 
       <Box as="main" mt={4} mb={10}>
-        <Box as="article">
-          <Container as="header" maxW={"6xl"}>
+        <Box>
+          <Container maxW={"6xl"}>
             <Breadcrumb
               mb={3.5}
               spacing="8px"
@@ -79,11 +121,76 @@ const Event = ({ location }: Props) => {
             </Heading>
           </Container>
 
-          <Container mt={16} maxW="fit-content">
-            <Box maxW={"3xl"}></Box>
+          <Container mt={16} maxW="5xl">
+            <SimpleGrid columns={[1, 1, 2, 3]} spacing={[3, 3, 4, 4, 4]}>
+              {data.allNodeEvent.edges.map(({ node }) => (
+                <LinkBox maxW={"xs"} as="article" key={node.id}>
+                  <Box overflow={"hidden"} rounded={"xl"}>
+                    {node.relationships?.field_image ? (
+                      <GatsbyImage
+                        image={
+                          node.relationships.field_image.localFile
+                            ?.childImageSharp?.gatsbyImageData
+                        }
+                        alt={node.field_image?.alt || ""}
+                      />
+                    ) : (
+                      <StaticImage
+                        src="../../images/no-image.webp"
+                        alt="NoImage"
+                        aspectRatio={1.618}
+                        placeholder="blurred"
+                        layout="constrained"
+                      />
+                    )}
+                    {/*
+                    {node.field_held ? (
+                      <></>
+                    ) : (
+                      <Badge
+                        top={3}
+                        left={3}
+                        fontSize="xl"
+                        position="absolute"
+                        colorScheme="green"
+                      >
+                        参加者募集
+                      </Badge>
+                    )}
+                    */}
+                  </Box>
+                  <Heading as="h2" mt={[3, 3, 4]} fontSize="xl">
+                    <LinkOverlay as={GatsbyLink} to={`/event/${node.ufl}/`}>
+                      {node.title}
+                    </LinkOverlay>
+                  </Heading>
+                  <VStack mt={3} spacing={2} align="stretch">
+                    <Flex align="center">
+                      <Tag>
+                        <TagLeftIcon boxSize="12px" as={AtSignIcon} />
+                        <TagLabel>場所</TagLabel>
+                      </Tag>
+                      <Text ml={3}>{node.field_location}</Text>
+                    </Flex>
+                    <Flex align="center">
+                      <Tag>
+                        <TagLeftIcon boxSize="12px" as={CalendarIcon} />
+                        <TagLabel>開始</TagLabel>
+                      </Tag>
+                      <Text ml={3}>{node.field_start_time}</Text>
+                    </Flex>
+                    <Flex align="center">
+                      <Tag>
+                        <TagLeftIcon boxSize="12px" as={CalendarIcon} />
+                        <TagLabel>終了</TagLabel>
+                      </Tag>
+                      <Text ml={3}>{node.field_end_time}</Text>
+                    </Flex>
+                  </VStack>
+                </LinkBox>
+              ))}
+            </SimpleGrid>
           </Container>
-
-          <Box as="footer" />
         </Box>
       </Box>
     </Layout>
