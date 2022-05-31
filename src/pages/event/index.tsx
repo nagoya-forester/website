@@ -99,7 +99,7 @@ const Event = ({ location, data }: Props) => {
 
       <Box as="main" mt={4} mb={10}>
         <Box>
-          <Container maxW={"6xl"}>
+          <Container maxW={"8xl"}>
             <Breadcrumb
               mb={3.5}
               spacing="8px"
@@ -121,10 +121,14 @@ const Event = ({ location, data }: Props) => {
             </Heading>
           </Container>
 
-          <Container mt={16} maxW="5xl">
-            <SimpleGrid columns={[1, 1, 2, 3]} spacing={[3, 3, 4, 4, 4]}>
+          <Container mt={16} maxW="8xl">
+            <SimpleGrid
+              columns={[2, 3, 4, 5]}
+              spacing={[3, 4, 5, 5, 6]}
+              justifyItems={"center"}
+            >
               {data.allNodeEvent.edges.map(({ node }) => (
-                <LinkBox maxW={"xs"} as="article" key={node.id}>
+                <LinkBox maxW={"xs"} as="article" key={node.id} w="100%">
                   <Box overflow={"hidden"} rounded={"xl"}>
                     {node.relationships?.field_image ? (
                       <GatsbyImage
@@ -164,29 +168,6 @@ const Event = ({ location, data }: Props) => {
                       {node.title}
                     </LinkOverlay>
                   </Heading>
-                  <VStack mt={3} spacing={2} align="stretch">
-                    <Flex align="center">
-                      <Tag>
-                        <TagLeftIcon boxSize="12px" as={AtSignIcon} />
-                        <TagLabel>場所</TagLabel>
-                      </Tag>
-                      <Text ml={3}>{node.field_location}</Text>
-                    </Flex>
-                    <Flex align="center">
-                      <Tag>
-                        <TagLeftIcon boxSize="12px" as={CalendarIcon} />
-                        <TagLabel>開始</TagLabel>
-                      </Tag>
-                      <Text ml={3}>{node.field_start_time}</Text>
-                    </Flex>
-                    <Flex align="center">
-                      <Tag>
-                        <TagLeftIcon boxSize="12px" as={CalendarIcon} />
-                        <TagLabel>終了</TagLabel>
-                      </Tag>
-                      <Text ml={3}>{node.field_end_time}</Text>
-                    </Flex>
-                  </VStack>
                 </LinkBox>
               ))}
             </SimpleGrid>
