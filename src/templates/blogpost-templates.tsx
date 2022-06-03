@@ -6,6 +6,7 @@ import {
   BreadcrumbLink,
   Container,
   Heading,
+  Text,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
@@ -28,6 +29,10 @@ export const query = graphql`
       changed(formatString: "YYYY-MM-DDTHH:mm:ss+09:00")
       create: created(formatString: "YYYY年MM月DD日")
       update: changed(formatString: "YYYY年MM月DD日")
+      body {
+        value
+        summary
+      }
     }
   }
 `;
@@ -35,6 +40,7 @@ type Props = {
   data: GatsbyTypes.BlogPostQuery;
   location: Location;
 };
+
 // markup
 const BlogPost = ({ location, data }: Props) => {
   const schema = {
@@ -77,7 +83,7 @@ const BlogPost = ({ location, data }: Props) => {
     <Layout>
       <Seo
         PageTitle={data.blog?.title || ""}
-        PageDesc="NPO法人名古屋シティフォレスター俱楽部WEBサイト利用に関する情報を記載しています。"
+        PageDesc={data.blog?.body?.summary || ""}
         PagePath={location.pathname}
         PageNoindex={false}
         PageSchema={[schemaBreadcrumb, schema]}
@@ -122,5 +128,4 @@ const BlogPost = ({ location, data }: Props) => {
     </Layout>
   );
 };
-
 export default BlogPost;
