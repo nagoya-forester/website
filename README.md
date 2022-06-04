@@ -1,6 +1,6 @@
 # **NagoyaCityForesterClub Website**
 
-This is the repository for the main [NagoyaForester website](https://nagoya-forester.or.jp).
+This is the repository for the main [NagoyaCityForesterClub website](https://nagoya-forester.or.jp).
 
 This site is built with [Gatsby](https://gatsbyjs.org).
 
