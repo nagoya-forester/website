@@ -139,7 +139,11 @@ const Record = ({ location, data }: Props) => {
           </Container>
 
           <Container mt={16} maxW="8xl">
-            <SimpleGrid columns={[2, 3, 4, 5, 5]} spacing={[3, 3, 4, 4, 5]}>
+            <SimpleGrid
+              columns={[2, 2, 4, 5, 5]}
+              spacing={[3, 3, 4, 4, 5]}
+              justifyItems={"center"}
+            >
               {data.allNodeRecord?.edges.map(({ node }) => (
                 <LinkBox
                   as="article"

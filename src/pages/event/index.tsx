@@ -6,18 +6,12 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   Container,
-  Flex,
   Heading,
   LinkBox,
   LinkOverlay,
   SimpleGrid,
-  Tag,
-  TagLabel,
-  TagLeftIcon,
-  Text,
-  VStack,
 } from "@chakra-ui/react";
-import { AtSignIcon, CalendarIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 import Layout from "../../components/layout";
 import Seo from "../../components/seo";
 import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
@@ -123,7 +117,7 @@ const Event = ({ location, data }: Props) => {
 
           <Container mt={16} maxW="8xl">
             <SimpleGrid
-              columns={[2, 3, 4, 5]}
+              columns={[2, 2, 4, 5]}
               spacing={[3, 4, 5, 5, 6]}
               justifyItems={"center"}
             >
@@ -147,21 +141,6 @@ const Event = ({ location, data }: Props) => {
                         layout="constrained"
                       />
                     )}
-                    {/*
-                    {node.field_held ? (
-                      <></>
-                    ) : (
-                      <Badge
-                        top={3}
-                        left={3}
-                        fontSize="xl"
-                        position="absolute"
-                        colorScheme="green"
-                      >
-                        参加者募集
-                      </Badge>
-                    )}
-                    */}
                   </Box>
                   <Heading as="h2" mt={[3, 3, 4]} fontSize="xl">
                     <LinkOverlay as={GatsbyLink} to={`/event/${node.ufl}/`}>
