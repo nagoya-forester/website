@@ -2,13 +2,15 @@ import * as React from "react";
 import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
 import {
   Alert,
+  AlertDescription,
+  AlertTitle,
   Box,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   Container,
   Heading,
-  Text,
+  AlertIcon,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import Layout from "../../components/layout";
@@ -81,7 +83,25 @@ const News = ({ location }: Props) => {
           </Container>
 
           <Container mt={16} maxW="fit-content">
-            <Box maxW={"3xl"}></Box>
+            <Box maxW={"3xl"}>
+              <Alert
+                status="info"
+                variant="subtle"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                textAlign="center"
+                height="200px"
+              >
+                <AlertIcon boxSize="40px" mr={0} />
+                <AlertTitle mt={4} mb={1} fontSize="lg">
+                  現在倶楽部からのお知らせはありません
+                </AlertTitle>
+                <AlertDescription maxWidth="sm">
+                  ご覧いただきありがとうございます。現在お知らせはないようです。他のページをご覧ください。
+                </AlertDescription>
+              </Alert>
+            </Box>
           </Container>
 
           <Box as="footer" />
