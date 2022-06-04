@@ -1,6 +1,7 @@
 import * as React from "react";
 import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
 import {
+  Alert,
   Box,
   Breadcrumb,
   BreadcrumbItem,

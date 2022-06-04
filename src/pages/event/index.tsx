@@ -31,7 +31,7 @@ export const query = graphql`
           drupal_id
           id
           title
-          ufl: field_start_time(formatString: "YYYY-MM-DD")
+          ufl: drupal_internal__nid
           field_start_time(formatString: "YYYY年MM月DD日HH時mm分")
           field_end_time(formatString: "YYYY年MM月DD日HH時mm分")
           field_image {

@@ -24,6 +24,7 @@ export const query = graphql`
       edges {
         node {
           id
+          drupal_internal__nid
           title
           created(formatString: "YYYY年MM月DD日HH時mm分")
           field_image {
@@ -144,7 +145,10 @@ const Blog = ({ location, data }: Props) => {
                     )}
                   </Box>
                   <Heading as="h2" fontSize="lg">
-                    <LinkOverlay as={GatsbyLink} to={`/blog/`}>
+                    <LinkOverlay
+                      as={GatsbyLink}
+                      to={`/blog/${node.drupal_internal__nid}/`}
+                    >
                       {node.title}
                     </LinkOverlay>
                   </Heading>
