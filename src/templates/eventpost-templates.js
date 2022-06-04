@@ -1,5 +1,4 @@
-import * as React from "react"
-import Layout from "../components/layout"
+import * as React from "react";
 import {
   Box,
   Breadcrumb,
@@ -11,15 +10,17 @@ import {
   OrderedList,
   Text,
   UnorderedList,
-} from "@chakra-ui/react"
-import { ChevronRightIcon } from "@chakra-ui/icons"
-import Seo from "../components/seo"
-import { graphql, Link as GatsbyLink } from "gatsby"
-import ReactHtmlParser, { processNodes } from "react-html-parser"
-import { GatsbyImage } from "gatsby-plugin-image"
+} from "@chakra-ui/react";
+import { ChevronRightIcon } from "@chakra-ui/icons";
+import { graphql, Link as GatsbyLink } from "gatsby";
+import { GatsbyImage } from "gatsby-plugin-image";
+import ReactHtmlParser, { processNodes } from "react-html-parser";
+import Layout from "../components/layout";
+import Seo from "../components/seo";
 
+// query
 export const query = graphql`
-  query ($id: String!) {
+  query EventPost($id: String!) {
     site {
       siteMetadata {
         title
@@ -74,73 +75,73 @@ export const query = graphql`
       }
     }
   }
-`
+`;
 
 // markup
+/* eslint-disable */
 const EventPost = ({ location, data }) => {
   function transform(node) {
     if (node.type === "tag" && node.name === "img") {
-      let uuid = node.attribs["data-entity-uuid"]
-      let alt = node.attribs["alt"]
+      let uuid = node.attribs["data-entity-uuid"];
+      let alt = node.attribs["alt"];
       return data.allFileFile.edges.map((edge) => {
         if (edge.node.drupal_id === uuid) {
           return (
             <GatsbyImage
               alt={alt}
-              image={edge.node.localFile.childImageSharp.gatsbyImageData}
+              image={edge.node.localFile?.childImageSharp?.gatsbyImageData}
             />
-          )
+          );
         }
-        return undefined
-      })
+        return undefined;
+      });
     }
     if (node.type === "tag" && node.name === "p") {
-      return <Text mt={5}>{processNodes(node.children, transform)}</Text>
+      return <Text mt={5}>{processNodes(node.children, transform)}</Text>;
     }
     if (node.type === "tag" && node.name === "h2") {
       return (
-        <Heading mt={16} mb={2} fontSize={"4xl"} as="h2">
+        <Heading mt={16} mb={5} fontSize={"4xl"} as="h2">
           {processNodes(node.children, transform)}
         </Heading>
-      )
+      );
     }
     if (node.type === "tag" && node.name === "h3") {
       return (
-        <Heading mt={8} mb={2} fontSize={"3xl"} as="h3">
+        <Heading mt={8} mb={5} fontSize={"3xl"} as="h3">
           {processNodes(node.children, transform)}
         </Heading>
-      )
+      );
     }
     if (node.type === "tag" && node.name === "h4") {
       return (
-        <Heading mt={4} mb={2} fontSize={"2xl"} as="h4">
+        <Heading mt={4} mb={5} fontSize={"2xl"} as="h4">
           {processNodes(node.children, transform)}
         </Heading>
-      )
+      );
     }
     if (node.type === "tag" && node.name === "ul") {
       return (
         <UnorderedList my={5} ml={7}>
           {processNodes(node.children, transform)}
         </UnorderedList>
-      )
+      );
     }
     if (node.type === "tag" && node.name === "ol") {
       return (
         <OrderedList my={5} ml={7}>
           {processNodes(node.children, transform)}
         </OrderedList>
-      )
+      );
     }
     if (node.type === "tag" && node.name === "li") {
-      return <ListItem>{processNodes(node.children, transform)}</ListItem>
+      return <ListItem>{processNodes(node.children, transform)}</ListItem>;
     }
   }
   const options = {
     decodeEntities: true,
     transform,
-  }
-  const event = data.event
+  };
   const schemaBreadcrumb = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -160,30 +161,31 @@ const EventPost = ({ location, data }) => {
       {
         "@type": "ListItem",
         position: 3,
-        name: event.title,
+        name: data.event.title,
         item: data.site.siteMetadata.siteUrl + location.pathname,
       },
     ],
-  }
+  };
   return (
     <Layout>
       <Seo
-        pagetitle={event.title}
-        pagedesc={
+        PageTitle={data.event.title || ""}
+        PageDesc={
           "場所: " +
-          event.field_location +
-          ", 開始時刻: " +
-          event.field_start_time +
-          ", 終了時刻: " +
-          event.field_end_time
+            data.event.field_location +
+            ", 開始時刻: " +
+            data.event.field_start_time +
+            ", 終了時刻: " +
+            data.event.field_end_time || ""
         }
-        pagepath={location.pathname}
-        schemaMarkup={[schemaBreadcrumb]}
+        PagePath={location.pathname}
+        PageNoindex={false}
+        PageSchema={schemaBreadcrumb}
       />
 
-      <Container as="main" maxW={"6xl"} mt={4} mb={10}>
+      <Box as="main" mt={4} mb={10}>
         <Box as="article">
-          <Box as="header">
+          <Container as="header" maxW={"6xl"}>
             <Breadcrumb
               mb={3.5}
               spacing="8px"
@@ -201,35 +203,37 @@ const EventPost = ({ location, data }) => {
               </BreadcrumbItem>
               <BreadcrumbItem isCurrentPage>
                 <BreadcrumbLink as={GatsbyLink} to={location.pathname}>
-                  {event.title}
+                  {data.event.title}
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </Breadcrumb>
             <Heading fontSize={"5xl"} as="h1" mb={4}>
-              {event.title}
+              {data.event.title}
             </Heading>
-            {event.relationships.field_image && (
+            {data.event.relationships.field_image && (
               <Box overflow={"hidden"}>
                 <GatsbyImage
                   image={
-                    event.relationships.field_image.localFile.childImageSharp
-                      .gatsbyImageData
+                    data.event.relationships.field_image.localFile
+                      .childImageSharp.gatsbyImageData
                   }
-                  alt={event.field_image.alt}
+                  alt={data.event.field_image.alt}
                 />
               </Box>
             )}
-          </Box>
+          </Container>
 
-          <Box maxW={"3xl"} mt={16} mb={2} mx={"auto"}>
-            {ReactHtmlParser(event.body.value, options)}
-          </Box>
+          <Container mt={16} maxW="fit-content">
+            <Box maxW={"3xl"}>
+              {ReactHtmlParser(data.event?.body?.value, options)}
+            </Box>
+          </Container>
 
           <Box as="footer" />
         </Box>
-      </Container>
+      </Box>
     </Layout>
-  )
-}
-
-export default EventPost
+  );
+};
+export default EventPost;
+/* eslint-enable */

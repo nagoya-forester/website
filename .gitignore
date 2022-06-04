@@ -5,5 +5,6 @@ package-lock.json
 .graphqlconfig
 schema.graphql
 .idea/
-.env.local
+.env.*
 yarn.lock
+src/__generated__

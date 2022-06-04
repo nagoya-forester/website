@@ -1,7 +1,4 @@
-import * as React from "react"
-import Layout from "../components/layout"
-import { graphql } from "gatsby"
-import ReactHtmlParser, { processNodes } from "react-html-parser"
+import * as React from "react";
 import {
   Box,
   Breadcrumb,
@@ -18,20 +15,23 @@ import {
   TagLeftIcon,
   Text,
   UnorderedList,
-} from "@chakra-ui/react"
+} from "@chakra-ui/react";
 import {
   AtSignIcon,
   SunIcon,
   AddIcon,
   CalendarIcon,
   ChevronRightIcon,
-} from "@chakra-ui/icons"
-import Seo from "../components/seo"
-import { Link as GatsbyLink } from "gatsby"
-import { GatsbyImage } from "gatsby-plugin-image"
+} from "@chakra-ui/icons";
+import { graphql, Link as GatsbyLink } from "gatsby";
+import { GatsbyImage } from "gatsby-plugin-image";
+import ReactHtmlParser, { processNodes } from "react-html-parser";
+import Layout from "../components/layout";
+import Seo from "../components/seo";
 
+// query
 export const query = graphql`
-  query ($id: String!) {
+  query RecordPost($id: String!) {
     site {
       siteMetadata {
         title
@@ -87,88 +87,85 @@ export const query = graphql`
       }
     }
   }
-`
-// styles
+`;
 
 // markup
+/* eslint-disable */
 const RecordPost = ({ location, data }) => {
   function transform(node) {
     if (node.type === "tag" && node.name === "img") {
-      let uuid = node.attribs["data-entity-uuid"]
-      let alt = node.attribs["alt"]
+      let uuid = node.attribs["data-entity-uuid"];
+      let alt = node.attribs["alt"];
       return data.allFileFile.edges.map((edge) => {
         if (edge.node.drupal_id === uuid) {
           return (
             <GatsbyImage
               alt={alt}
-              image={edge.node.localFile.childImageSharp.gatsbyImageData}
+              image={edge.node.localFile?.childImageSharp?.gatsbyImageData}
             />
-          )
+          );
         }
-        return undefined
-      })
+        return undefined;
+      });
     }
     if (node.type === "tag" && node.name === "p") {
-      return <Text mt={5}>{processNodes(node.children, transform)}</Text>
+      return <Text mt={5}>{processNodes(node.children, transform)}</Text>;
     }
     if (node.type === "tag" && node.name === "h2") {
       return (
-        <Heading mt={16} mb={2} fontSize={"4xl"} as="h2">
+        <Heading mt={16} mb={5} fontSize={"4xl"} as="h2">
           {processNodes(node.children, transform)}
         </Heading>
-      )
+      );
     }
     if (node.type === "tag" && node.name === "h3") {
       return (
-        <Heading mt={8} mb={2} fontSize={"3xl"} as="h3">
+        <Heading mt={8} mb={5} fontSize={"3xl"} as="h3">
           {processNodes(node.children, transform)}
         </Heading>
-      )
+      );
     }
     if (node.type === "tag" && node.name === "h4") {
       return (
-        <Heading mt={4} mb={2} fontSize={"2xl"} as="h4">
+        <Heading mt={4} mb={5} fontSize={"2xl"} as="h4">
           {processNodes(node.children, transform)}
         </Heading>
-      )
+      );
     }
     if (node.type === "tag" && node.name === "ul") {
       return (
         <UnorderedList my={5} ml={7}>
           {processNodes(node.children, transform)}
         </UnorderedList>
-      )
+      );
     }
     if (node.type === "tag" && node.name === "ol") {
       return (
         <OrderedList my={5} ml={7}>
           {processNodes(node.children, transform)}
         </OrderedList>
-      )
+      );
     }
     if (node.type === "tag" && node.name === "li") {
-      return <ListItem>{processNodes(node.children, transform)}</ListItem>
+      return <ListItem>{processNodes(node.children, transform)}</ListItem>;
     }
   }
-
   const options = {
     decodeEntities: true,
     transform,
-  }
-
-  const record = data.record
+  };
   const schema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    headline: record.title,
-    datePublished: record.field_start_time,
-    dateModified: record.changed,
+    headline: data.record.title,
+    datePublished: data.record.field_start_time,
+    dateModified: data.record.changed,
     author: {
       "@type": "Organization",
-      url: data.site.siteMetadata.siteUrl,
-      name: data.site.siteMetadata.title,
+      url: data.site?.siteMetadata?.siteUrl,
+      name: data.site?.siteMetadata?.title,
     },
-  }
+  };
   const schemaBreadcrumb = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -194,33 +191,33 @@ const RecordPost = ({ location, data }) => {
       {
         "@type": "ListItem",
         position: 4,
-        name: record.title,
+        name: data.record.title,
         item: data.site.siteMetadata.siteUrl + location.pathname,
       },
     ],
-  }
-
+  };
   return (
     <Layout>
       <Seo
-        pagetitle={record.title}
-        pagedesc={
+        PageTitle={data.record.title || ""}
+        PageDesc={
           "活動場所: " +
-          record.field_place +
-          ", 活動日: " +
-          record.activity_day +
-          ", 参加人数: " +
-          record.field_number_participants +
-          ", 天候: " +
-          record.field_weather
+            data.record.field_place +
+            ", 活動日: " +
+            data.record.activity_day +
+            ", 参加人数: " +
+            data.record.field_number_participants +
+            ", 天候: " +
+            data.record.field_weather || ""
         }
-        pagepath={location.pathname}
-        schemaMarkup={[schema, schemaBreadcrumb]}
+        PagePath={location.pathname}
+        PageNoindex={false}
+        PageSchema={[schemaBreadcrumb, schema]}
       />
 
-      <Container as="main" maxW={"6xl"} mt={4} mb={10}>
+      <Box as="main" mt={4} mb={10}>
         <Box as="article">
-          <Box as="header">
+          <Container as="header" maxW={"6xl"}>
             <Breadcrumb
               mb={3.5}
               spacing="8px"
@@ -243,12 +240,12 @@ const RecordPost = ({ location, data }) => {
               </BreadcrumbItem>
               <BreadcrumbItem isCurrentPage>
                 <BreadcrumbLink as={GatsbyLink} to={location.pathname}>
-                  {record.title}
+                  {data.record.title}
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </Breadcrumb>
             <Heading fontSize={"5xl"} as="h1" mb={4}>
-              {record.title}
+              {data.record.title}
             </Heading>
             <Stack
               direction={["column", "column", "row"]}
@@ -261,52 +258,54 @@ const RecordPost = ({ location, data }) => {
                   <TagLeftIcon boxSize="12px" as={AtSignIcon} />
                   <TagLabel>活動場所</TagLabel>
                 </Tag>
-                <Text ml={3}>{record.field_place}</Text>
+                <Text ml={3}>{data.record?.field_place}</Text>
               </Flex>
               <Flex align="center">
                 <Tag>
                   <TagLeftIcon boxSize="12px" as={CalendarIcon} />
                   <TagLabel>活動日</TagLabel>
                 </Tag>
-                <Text ml={3}>{record.activity_day}</Text>
+                <Text ml={3}>{data.record.activity_day}</Text>
               </Flex>
               <Flex align="center">
                 <Tag>
                   <TagLeftIcon boxSize="12px" as={AddIcon} />
                   <TagLabel>参加人数</TagLabel>
                 </Tag>
-                <Text ml={3}>{record.field_number_participants}人</Text>
+                <Text ml={3}>{data.record?.field_number_participants}人</Text>
               </Flex>
               <Flex align="center">
                 <Tag>
                   <TagLeftIcon boxSize="12px" as={SunIcon} />
                   <TagLabel>天候</TagLabel>
                 </Tag>
-                <Text ml={3}>{record.field_weather}</Text>
+                <Text ml={3}>{data.record?.field_weather}</Text>
               </Flex>
             </Stack>
-            {record.relationships.field_image && (
+            {data.record.relationships.field_image && (
               <Box overflow={"hidden"}>
                 <GatsbyImage
                   image={
-                    record.relationships.field_image.localFile.childImageSharp
-                      .gatsbyImageData
+                    data.record.relationships.field_image.localFile
+                      .childImageSharp.gatsbyImageData
                   }
-                  alt={record.field_image.alt}
+                  alt={data.record.field_image.alt}
                 />
               </Box>
             )}
-          </Box>
+          </Container>
 
-          <Box maxW={"3xl"} mt={16} mb={2} mx={"auto"}>
-            {ReactHtmlParser(record.body.value, options)}
-          </Box>
+          <Container mt={16} maxW="fit-content">
+            <Box maxW={"3xl"}>
+              {ReactHtmlParser(data.record.body?.value, options)}
+            </Box>
+          </Container>
 
           <Box as="footer" />
         </Box>
-      </Container>
+      </Box>
     </Layout>
-  )
-}
-
-export default RecordPost
+  );
+};
+export default RecordPost;
+/* eslint-enable */
