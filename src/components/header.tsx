@@ -33,6 +33,9 @@ import { HeaderLinks, HeaderPickup } from "../data/header_links";
 // markup
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const handleClick = () => {
+    window["scrollTo"]({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <Box as="header" h={{ base: "60px", md: "70px", lg: "80px" }}>
@@ -125,7 +128,13 @@ const Header = () => {
           left={0}
           right={0}
         >
-          <Box aria-label="ページトップに戻る" as="button" h="56px" w="56px">
+          <Box
+            onClick={handleClick}
+            aria-label="ページトップに戻る"
+            as="button"
+            h="56px"
+            w="56px"
+          >
             <ChevronUpIcon w={8} h={8} />
             <Box fontSize="xs">先頭へ</Box>
           </Box>
