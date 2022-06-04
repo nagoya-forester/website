@@ -6,13 +6,22 @@ import {
   BreadcrumbLink,
   Container,
   Heading,
+  ListItem,
+  OrderedList,
   Text,
+  UnorderedList,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
+import { graphql, Link as GatsbyLink } from "gatsby";
 import Layout from "../components/layout";
 import Seo from "../components/seo";
-
+import parse, {
+  domToReact,
+  attributesToProps,
+  Element,
+  HTMLReactParserOptions,
+} from "html-react-parser";
+import { StaticImage } from "gatsby-plugin-image";
 // query
 export const query = graphql`
   query BlogPost($id: String!) {
@@ -34,6 +43,23 @@ export const query = graphql`
         summary
       }
     }
+    allFileFile {
+      edges {
+        node {
+          drupal_id
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                layout: CONSTRAINED
+                formats: WEBP
+                placeholder: BLURRED
+                transformOptions: { fit: COVER }
+              )
+            }
+          }
+        }
+      }
+    }
   }
 `;
 type Props = {
@@ -43,6 +69,78 @@ type Props = {
 
 // markup
 const BlogPost = ({ location, data }: Props) => {
+  const options: HTMLReactParserOptions = {
+    replace: (domNode) => {
+      const typedDomNode = domNode as Element;
+
+      if (typedDomNode.name === "img") {
+        const { src, alt } = typedDomNode.attribs;
+        // const imgData = typedDomNode.attribs["data-entity-uuid"];
+        return (
+          <img src={`https://app.nagoya-forester.or.jp${src}`} alt={alt} />
+        );
+      }
+
+      if (typedDomNode.name === "p") {
+        return <Text mt={5}>{domToReact(typedDomNode.children, options)}</Text>;
+      }
+      if (typedDomNode.name === "h2") {
+        return (
+          <Heading mt={16} mb={5} fontSize={"4xl"} as="h2">
+            {domToReact(typedDomNode.children, options)}
+          </Heading>
+        );
+      }
+      if (typedDomNode.name === "h3") {
+        return (
+          <Heading mt={8} mb={5} fontSize={"3xl"} as="h3">
+            {domToReact(typedDomNode.children, options)}
+          </Heading>
+        );
+      }
+      if (typedDomNode.name === "h4") {
+        return (
+          <Heading mt={4} mb={5} fontSize={"2xl"} as="h4">
+            {domToReact(typedDomNode.children, options)}
+          </Heading>
+        );
+      }
+      if (typedDomNode.name === "ul") {
+        return (
+          <UnorderedList my={5} ml={7}>
+            {domToReact(typedDomNode.children, options)}
+          </UnorderedList>
+        );
+      }
+      if (typedDomNode.name === "ol") {
+        return (
+          <OrderedList my={5} ml={7}>
+            {domToReact(typedDomNode.children, options)}
+          </OrderedList>
+        );
+      }
+      if (typedDomNode.name === "li") {
+        return (
+          <ListItem>{domToReact(typedDomNode.children, options)}</ListItem>
+        );
+      }
+
+      if (typedDomNode.attribs && typedDomNode.name === "a") {
+        return (
+          <a
+            {...attributesToProps(typedDomNode.attribs)}
+            className="underline text-primary-500"
+            target="_blank"
+          >
+            {typedDomNode.children &&
+              domToReact(typedDomNode.children, options)}
+          </a>
+        );
+      }
+
+      return false;
+    },
+  };
   const schema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -79,6 +177,7 @@ const BlogPost = ({ location, data }: Props) => {
       },
     ],
   };
+  const html: any = data.blog?.body?.value;
   return (
     <Layout>
       <Seo
@@ -119,7 +218,7 @@ const BlogPost = ({ location, data }: Props) => {
           </Container>
 
           <Container mt={16} maxW="fit-content">
-            <Box maxW={"3xl"}></Box>
+            <Box maxW={"3xl"}>{parse(html, options)}</Box>
           </Container>
 
           <Box as="footer" />
