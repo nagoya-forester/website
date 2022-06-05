@@ -1,7 +1,7 @@
 import * as React from "react";
-import Layout from "../../components/layout";
+import Layout from "../../../components/layout";
 import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
-import Seo from "../../components/seo";
+import Seo from "../../../components/seo";
 import {
   Box,
   Breadcrumb,
@@ -13,8 +13,9 @@ import {
   Heading,
   SimpleGrid,
   Stack,
+  Link,
 } from "@chakra-ui/react";
-import { ChevronRightIcon } from "@chakra-ui/icons";
+import { ChevronRightIcon, LinkIcon } from "@chakra-ui/icons";
 import { StaticImage } from "gatsby-plugin-image";
 
 type Props = {
@@ -93,7 +94,7 @@ const Place = ({ location }: Props) => {
             </Heading>
             <Box overflow={"hidden"} mt={4}>
               <StaticImage
-                src="../../images/about/placehero.webp"
+                src="../../../images/about/placehero.webp"
                 alt="地図"
                 placeholder="blurred"
                 layout="constrained"
@@ -118,7 +119,7 @@ const Place = ({ location }: Props) => {
                 </Stack>
                 <Flex>
                   <StaticImage
-                    src="../../images/no-image.webp"
+                    src="../../../images/no-image.webp"
                     alt="地図"
                     placeholder="blurred"
                     layout="constrained"
@@ -139,10 +140,19 @@ const Place = ({ location }: Props) => {
                     続いて雑木林、ビートルアパート、中間地点には見晴らしの良い「NCFCの広場」少し下れは椿の群生、曲がりくねったつづら坂、タヌキの空住居穴
                     は自然のまま。2021年から大径木の間伐作業に入ります。
                   </Text>
+                  <Text>
+                    <Link
+                      as={GatsbyLink}
+                      to={"/about/place/jokoji/"}
+                      color="digital.200"
+                    >
+                      定光寺ふれあいの森 2022年度協定フィールドの間伐について
+                    </Link>
+                  </Text>
                 </Stack>
                 <Flex>
                   <StaticImage
-                    src="../../images/no-image.webp"
+                    src="../../../images/no-image.webp"
                     alt="地図"
                     placeholder="blurred"
                     layout="constrained"
@@ -164,7 +174,7 @@ const Place = ({ location }: Props) => {
                 </Stack>
                 <Flex>
                   <StaticImage
-                    src="../../images/no-image.webp"
+                    src="../../../images/no-image.webp"
                     alt="地図"
                     placeholder="blurred"
                     layout="constrained"
@@ -186,7 +196,7 @@ const Place = ({ location }: Props) => {
                 </Stack>
                 <Flex>
                   <StaticImage
-                    src="../../images/no-image.webp"
+                    src="../../../images/no-image.webp"
                     alt="地図"
                     placeholder="blurred"
                     layout="constrained"
