@@ -177,7 +177,7 @@ const Jokoji = ({ location }: Props) => {
                 <ListItem>選木テープを回収する</ListItem>
               </UnorderedList>
               <Heading mt={8} mb={5} fontSize={"3xl"} as="h2">
-                5 安全確保について
+                6 安全確保について
               </Heading>
               <UnorderedList my={5} ml={7}>
                 <ListItem>重心に逆らわず安全な方向へ倒す</ListItem>
@@ -191,11 +191,8 @@ const Jokoji = ({ location }: Props) => {
                 </ListItem>
               </UnorderedList>
               <Heading mt={8} mb={5} fontSize={"3xl"} as="h2">
-                5 その他予想外のことが生じたらその都度協議する
+                7 その他予想外のことが生じたらその都度協議する
               </Heading>
-              <Text mt={5}></Text>
-              <Text mt={5}></Text>
-              <Text mt={5}></Text>
             </Box>
           </Container>
         </Box>
