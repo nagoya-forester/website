@@ -10,8 +10,6 @@ import {
   Container,
   Text,
   Heading,
-  Alert,
-  AlertIcon,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 
@@ -86,10 +84,6 @@ const Contact = ({ location }: Props) => {
               <Heading mt={16} mb={2} fontSize={"4xl"} as="h2">
                 直接のお問い合わせ
               </Heading>
-              <Alert mt={5} status="warning">
-                <AlertIcon />
-                2022年6月1日～2022年6月10日まで担当者不在のためお問い合わせに返信できません。
-              </Alert>
               <Text mt={5}>mail:</Text>
               <Text mt={5}>ncfc51yamada@gmail.com</Text>
               <Text mt={5}>理事長 山田 均</Text>
