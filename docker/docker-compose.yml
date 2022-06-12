@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  gatsby:
+    container_name: gatsby
+    build:
+      context: ./gatsby
+      dockerfile: Dockerfile
+    volumes:
+      - type: bind
+        source: "./public"
+        target: "/website/public/"
+  webserver:
+    container_name: webserver
+    image: httpd:alpine
+    volumes:
+      - type: bind
+        source: "./public"
+        target: "/usr/local/apache2/htdocs/"
+    ports:
+      - "8090:80"
+volumes:
+  public:
