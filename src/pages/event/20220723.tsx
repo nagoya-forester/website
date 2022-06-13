@@ -160,7 +160,7 @@ const EventPost20220723 = ({ location }: Props) => {
           </Container>
           <Container mt={16} maxW="fit-content">
             <Box maxW={"6xl"}>
-              <Heading textAlign={"center"} mb={5} fontSize={"4xl"} as="h2">
+              <Heading textAlign={"center"} mb={10} fontSize={"4xl"} as="h2">
                 体験学習内容
               </Heading>
               <SimpleGrid columns={[1, 1, 2]} spacing={5}>
