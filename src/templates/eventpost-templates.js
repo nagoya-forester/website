@@ -179,7 +179,7 @@ const EventPost = ({ location, data }) => {
             data.event.field_end_time || ""
         }
         PagePath={location.pathname}
-        PageNoindex={false}
+        PageNoindex={true}
         PageSchema={schemaBreadcrumb}
       />
 
