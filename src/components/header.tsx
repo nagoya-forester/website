@@ -17,6 +17,11 @@ import {
   Stack,
   Input,
   HStack,
+  AlertIcon,
+  AlertTitle,
+  Alert,
+  CloseButton,
+  AlertDescription,
 } from "@chakra-ui/react";
 import {
   HamburgerIcon,
@@ -36,137 +41,175 @@ const Header = () => {
   const handleClick = () => {
     window["scrollTo"]({ top: 0, behavior: "smooth" });
   };
-
+  const {
+    isOpen: isVisible,
+    onOpen: onAlertOpen,
+    onClose: onAlertClose,
+  } = useDisclosure({
+    defaultIsOpen: true,
+  });
   return (
-    <Box as="header" h={{ base: "60px", md: "70px", lg: "80px" }}>
-      <Container
-        maxWidth="container.2xl"
-        display="flex"
-        justifyContent="space-between"
-      >
-        <Box w={{ base: "240px", md: "280px", lg: "320px" }} mr="auto">
-          <Link as={GatsbyLink} to={"/"} display="flex">
-            <StaticImage
-              src="../images/site_logo.png"
-              alt="NPO法人 名古屋シティフォレスター倶楽部"
-              placeholder="blurred"
-              layout="constrained"
-              width={320}
-              height={80}
-            />
-          </Link>
-        </Box>
-        <Flex
-          display={{ base: "none", md: "none", lg: "flex" }}
-          ml="auto"
-          fontWeight="bold"
-          pr={5}
-        >
-          {HeaderPickup.map((header_pickup) => (
-            <Box key={header_pickup.url}>
-              <Link
-                as={GatsbyLink}
-                to={header_pickup.url}
-                mx=".60vw"
-                px=".60vw"
-                display="flex"
-                h="100%"
-                alignItems="center"
-              >
-                {header_pickup.name}
-              </Link>
-            </Box>
-          ))}
-        </Flex>
-
-        <Flex>
-          {/* SearchIcon */}
-          <Box
-            aria-label="サイト内検索"
-            as="button"
-            display={["none", "block", "block", "none", "block"]}
-            h={{ base: "60px", md: "70px", lg: "80px" }}
-            w={{ base: "60px", md: "70px", lg: "80px" }}
-            onClick={onOpen}
-          >
-            <SearchIcon w={6} h={6} />
-            <Box mt={[0.5, 0.5, 1]} fontSize="xs">
-              検索
-            </Box>
-          </Box>
-          {/* SearchIcon End */}
-          {/* HamburgerMenu */}
-          <Box
-            aria-label="メニュー"
-            as="button"
-            h={{ base: "60px", md: "70px", lg: "80px" }}
-            w={{ base: "60px", md: "70px", lg: "80px" }}
-            onClick={onOpen}
-          >
-            <HamburgerIcon w={7} h={7} />
-            <Box mt={[0.5, 0.5, 1]} fontSize="xs">
-              MENU
-            </Box>
-          </Box>
-          <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
-            <HamburgerMenu />
-          </Drawer>
-          {/* HamburgerMenu End */}
-        </Flex>
-
-        {/* MobileNavigation */}
-
+    <>
+      <Box as="header" h={{ base: "60px", md: "70px", lg: "80px" }}>
         <Container
-          backgroundColor="white"
-          zIndex="docked"
-          display={{ base: "flex", md: "none" }}
+          maxWidth="container.2xl"
+          display="flex"
           justifyContent="space-between"
-          position="fixed"
-          bottom={0}
-          width="full"
-          height="56px"
-          left={0}
-          right={0}
         >
-          <Box
-            onClick={handleClick}
-            aria-label="ページトップに戻る"
-            as="button"
-            h="56px"
-            w="56px"
-          >
-            <ChevronUpIcon w={8} h={8} />
-            <Box fontSize="xs">先頭へ</Box>
+          <Box w={{ base: "240px", md: "280px", lg: "320px" }} mr="auto">
+            <Link as={GatsbyLink} to={"/"} display="flex">
+              <StaticImage
+                src="../images/site_logo.png"
+                alt="NPO法人 名古屋シティフォレスター倶楽部"
+                placeholder="blurred"
+                layout="constrained"
+                width={320}
+                height={80}
+              />
+            </Link>
           </Box>
-          <Box
-            aria-label="サイト内検索"
-            as="button"
-            h="56px"
-            w="56px"
-            onClick={onOpen}
+          <Flex
+            display={{ base: "none", md: "none", lg: "flex" }}
+            ml="auto"
+            fontWeight="bold"
+            pr={5}
           >
-            <SearchIcon w={5} h={5} />
-            <Box mt={0.5} fontSize="xs">
-              検索
-            </Box>
-          </Box>
-          <Box
-            aria-label="メニュー"
-            as="button"
-            h="56px"
-            w="56px"
-            onClick={onOpen}
-          >
-            <HamburgerIcon w={7} h={7} />
-            <Box mt={0.5} fontSize="xs">
-              MENU
-            </Box>
-          </Box>
-        </Container>
+            {HeaderPickup.map((header_pickup) => (
+              <Box key={header_pickup.url}>
+                <Link
+                  as={GatsbyLink}
+                  to={header_pickup.url}
+                  mx=".60vw"
+                  px=".60vw"
+                  display="flex"
+                  h="100%"
+                  alignItems="center"
+                >
+                  {header_pickup.name}
+                </Link>
+              </Box>
+            ))}
+          </Flex>
 
-        {/* MobileNavigation End */}
-      </Container>
-    </Box>
+          <Flex>
+            {/* SearchIcon */}
+            <Box
+              aria-label="サイト内検索"
+              as="button"
+              display={["none", "block", "block", "none", "block"]}
+              h={{ base: "60px", md: "70px", lg: "80px" }}
+              w={{ base: "60px", md: "70px", lg: "80px" }}
+              onClick={onOpen}
+            >
+              <SearchIcon w={6} h={6} />
+              <Box mt={[0.5, 0.5, 1]} fontSize="xs">
+                検索
+              </Box>
+            </Box>
+            {/* SearchIcon End */}
+            {/* HamburgerMenu */}
+            <Box
+              aria-label="メニュー"
+              as="button"
+              h={{ base: "60px", md: "70px", lg: "80px" }}
+              w={{ base: "60px", md: "70px", lg: "80px" }}
+              onClick={onOpen}
+            >
+              <HamburgerIcon w={7} h={7} />
+              <Box mt={[0.5, 0.5, 1]} fontSize="xs">
+                MENU
+              </Box>
+            </Box>
+            <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
+              <HamburgerMenu />
+            </Drawer>
+            {/* HamburgerMenu End */}
+          </Flex>
+
+          {/* MobileNavigation */}
+
+          <Container
+            backgroundColor="white"
+            zIndex="docked"
+            display={{ base: "flex", md: "none" }}
+            justifyContent="space-between"
+            position="fixed"
+            bottom={0}
+            width="full"
+            height="56px"
+            left={0}
+            right={0}
+          >
+            <Box
+              onClick={handleClick}
+              aria-label="ページトップに戻る"
+              as="button"
+              h="56px"
+              w="56px"
+            >
+              <ChevronUpIcon w={8} h={8} />
+              <Box fontSize="xs">先頭へ</Box>
+            </Box>
+            <Box
+              aria-label="サイト内検索"
+              as="button"
+              h="56px"
+              w="56px"
+              onClick={onOpen}
+            >
+              <SearchIcon w={5} h={5} />
+              <Box mt={0.5} fontSize="xs">
+                検索
+              </Box>
+            </Box>
+            <Box
+              aria-label="メニュー"
+              as="button"
+              h="56px"
+              w="56px"
+              onClick={onOpen}
+            >
+              <HamburgerIcon w={7} h={7} />
+              <Box mt={0.5} fontSize="xs">
+                MENU
+              </Box>
+            </Box>
+          </Container>
+
+          {/* MobileNavigation End */}
+        </Container>
+      </Box>
+      {isVisible ? (
+        <Box>
+          <Alert status="info" maxWidth="container.2xl" mx="auto">
+            <AlertIcon />
+            <Flex>
+              <AlertTitle>お知らせ</AlertTitle>
+              <AlertDescription>
+                2022年7月23日(土)9時から
+                <Link
+                  as={GatsbyLink}
+                  to={"/event/20220723/"}
+                  textDecoration={"underline"}
+                >
+                  里山学校「森林環境学習と体験」第15回
+                </Link>
+                を開催します。ぜひご参加ください。
+              </AlertDescription>
+            </Flex>
+            <CloseButton
+              alignSelf="flex-start"
+              position="relative"
+              right={-1}
+              top={-1}
+              onClick={onAlertClose}
+            />
+          </Alert>
+        </Box>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
 
