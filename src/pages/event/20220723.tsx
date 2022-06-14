@@ -89,6 +89,10 @@ const EventPost20220723 = ({ location }: Props) => {
     offers: {
       "@type": "Offer",
       price: "0",
+      priceCurrency: "JPY",
+      availability: "https://schema.org/InStock",
+      validFrom: "2022-06-12T00:00:00+09:00",
+      url: site.siteMetadata.siteUrl + location.pathname,
     },
     performer: {
       "@type": "PerformingGroup",
