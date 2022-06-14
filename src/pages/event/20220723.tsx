@@ -63,6 +63,7 @@ const EventPost20220723 = ({ location }: Props) => {
     "@context": "https://schema.org",
     "@type": "Event",
     name: "里山学校「森林環境学習と体験」第15回",
+    eventStatus: "https://schema.org/EventScheduled",
     startDate: "2022-07-23T09:00:00+09:00",
     endDate: "2022-07-23T15:00:00+09:00",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
@@ -84,6 +85,14 @@ const EventPost20220723 = ({ location }: Props) => {
       "@type": "Organization",
       name: site.siteMetadata.title,
       url: site.siteMetadata.siteUrl,
+    },
+    offers: {
+      "@type": "Offer",
+      price: "0",
+    },
+    performer: {
+      "@type": "PerformingGroup",
+      name: site.siteMetadata.title,
     },
   };
   return (
