@@ -17,7 +17,13 @@ const Layout = ({ children }: Props) => {
   return (
     <ChakraProvider theme={theme}>
       <Global styles={GlobalStyles} />
-      <Seo PageTitle={""} PageDesc={""} PagePath={""} PageNoindex={false} />
+      <Seo
+        PageTitle={""}
+        PageDesc={""}
+        PagePath={""}
+        PageNoindex={false}
+        PageSchema={""}
+      />
       <Header />
       {children}
       <Footer />
