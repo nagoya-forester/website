@@ -295,7 +295,7 @@ const EventPost20220723 = ({ location }: Props) => {
                 詳しい場所の案内と詳細はイベント案内PDFを御覧ください。
               </Text>
               <Link
-                href="https://app.nagoya-forester.or.jp/sites/default/files/2022-06/satoyamagakko.pdf"
+                href="https://drive.google.com/file/d/1_ZdkyzpPj_jnzXG32yaMkNn7kK7_fTLm/view?usp=sharing"
                 color="digital.200"
                 isExternal
               >
