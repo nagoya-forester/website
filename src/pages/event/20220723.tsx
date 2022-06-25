@@ -231,7 +231,11 @@ const EventPost20220723 = ({ location }: Props) => {
           <Container mt={16} maxW="fit-content">
             <Box maxW={"3xl"}>
               <UnorderedList my={5} ml={7}>
-                <ListItem>日時: 2022年7月23日(土) 9時～15時</ListItem>
+                <ListItem>
+                  日時: 2022年7月23日(土) 9時～15時
+                  <br />
+                  悪天を除き雨天決行します。屋根付きの解放空間で行います。
+                </ListItem>
                 <ListItem>
                   場所: 「愛知森林管理事務所森林交流館の奥の建物」瀬戸川平町１
                   駐車場有
@@ -243,7 +247,14 @@ const EventPost20220723 = ({ location }: Props) => {
                 <ListItem>
                   換気は良好ですが、家族単位等少人数グループで行います。なお、アルコール消毒を準備します。マスクを持参ください。
                 </ListItem>
-                <ListItem>昼食、飲み物は各自持参ください。</ListItem>
+                <ListItem>
+                  森林を歩きますのでスニーカー、長袖シャツでお願いします。
+                </ListItem>
+                <ListItem>
+                  昼食、飲み物は各自持参ください。
+                  <br />
+                  なお、暑さ対策に配慮し冷茶を用意します。
+                </ListItem>
                 <ListItem>損害保険は倶楽部で加入します。</ListItem>
               </UnorderedList>
               <Text mt={5}>30名を上限に募集します。家族参加を歓迎します。</Text>
@@ -295,7 +306,7 @@ const EventPost20220723 = ({ location }: Props) => {
                 詳しい場所の案内と詳細はイベント案内PDFを御覧ください。
               </Text>
               <Link
-                href="https://drive.google.com/file/d/1_ZdkyzpPj_jnzXG32yaMkNn7kK7_fTLm/view?usp=sharing"
+                href="https://drive.google.com/file/d/1xzxkZy6chj-Ql3CDKWD7klsyFam2dJn2/view?usp=sharing"
                 color="digital.200"
                 isExternal
               >
