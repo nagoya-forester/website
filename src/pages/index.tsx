@@ -1,23 +1,7 @@
 import * as React from "react";
 import Layout from "../components/layout";
-import { Link as GatsbyLink, graphql } from "gatsby";
-import {
-  Box,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Button,
-  Container,
-  Flex,
-  Heading,
-  SimpleGrid,
-  Stack,
-  Stat,
-  StatLabel,
-  StatNumber,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Link as GatsbyLink } from "gatsby";
+import { Box, Button, Container, Heading, Stack, Text } from "@chakra-ui/react";
 import { StaticImage } from "gatsby-plugin-image";
 
 // query
