@@ -32,6 +32,7 @@ const config: GatsbyConfig = {
       options: {
         baseUrl: process.env.API_URL,
         apiBase: `jsonapi`,
+        concurrentFileRequests: 100,
       },
     },
     {

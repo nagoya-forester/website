@@ -35,7 +35,7 @@ const Forestry = ({ location }: Props) => {
   const schemaArticle = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: "森林・林業ボランティア",
+    headline: "森林・林業ボランティアとは 活動内容や魅力を紹介",
     datePublished: "2022-01-01T00:00:00+09:00",
     dateModified: "2022-05-24T12:00:00+09:00",
     author: {
@@ -63,7 +63,7 @@ const Forestry = ({ location }: Props) => {
       {
         "@type": "ListItem",
         position: 3,
-        name: "森林・林業ボランティア",
+        name: "森林・林業ボランティアとは 活動内容や魅力を紹介",
         item: site.siteMetadata.siteUrl + "/volunteer/forestry/",
       },
     ],
@@ -71,7 +71,7 @@ const Forestry = ({ location }: Props) => {
   return (
     <Layout>
       <Seo
-        PageTitle="森林・林業ボランティア"
+        PageTitle="森林・林業ボランティアとは 活動内容や魅力を紹介"
         PageDesc="森林・林業ボランティアとは、植樹・下草刈り・間伐・枝打ちをはじめ、森の植生調査や林道整備などを行うボランティアです。活動をする以外にも寄付や森づくりについて考え実践することも立派な森林・林業ボランティア活動です。"
         PagePath={location.pathname}
         PageNoindex={false}
@@ -98,12 +98,12 @@ const Forestry = ({ location }: Props) => {
               </BreadcrumbItem>
               <BreadcrumbItem isCurrentPage>
                 <BreadcrumbLink as={GatsbyLink} to={"/volunteer/forestry/"}>
-                  森林・林業ボランティア
+                  森林・林業ボランティアとは 活動内容や魅力を紹介
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </Breadcrumb>
             <Heading fontSize={"5xl"} as="h1">
-              森林・林業ボランティア
+              森林・林業ボランティアとは 活動内容や魅力を紹介
             </Heading>
             <Box overflow={"hidden"} mt={4}>
               <StaticImage
