@@ -1,6 +1,10 @@
 import * as React from "react";
-import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
+import { graphql, Link as GatsbyLink } from "gatsby";
 import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
   Box,
   Breadcrumb,
   BreadcrumbItem,
@@ -10,13 +14,8 @@ import {
   LinkBox,
   LinkOverlay,
   SimpleGrid,
-  Stack,
-  Tag,
-  TagLabel,
-  TagLeftIcon,
-  Text,
 } from "@chakra-ui/react";
-import { CalendarIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 import Layout from "../../components/layout";
 import Seo from "../../components/seo";
 import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
@@ -124,44 +123,23 @@ const Event = ({ location, data }: Props) => {
             <Heading mt={16} mb={5} fontSize={"4xl"} as="h2">
               開催予定イベント
             </Heading>
-            <LinkBox mx={"auto"} maxW={"5xl"} as="article">
-              <Stack direction={["column", "column", "row"]} spacing={5}>
-                <Box mx={"auto"} overflow={"hidden"} rounded={"xl"}>
-                  <StaticImage
-                    src="../../images/event/20220723-1.webp"
-                    alt="NoImage"
-                    aspectRatio={1.618}
-                    placeholder="blurred"
-                    layout="constrained"
-                  />
-                </Box>
-                <Box mx={"auto"} maxW={["100%", "100%", "50%"]}>
-                  <Heading as="h2" mt={[3, 3, 4]} fontSize="xl">
-                    <LinkOverlay as={GatsbyLink} to={`/event/20220723/`}>
-                      里山学校「森林環境学習と体験」第15回
-                    </LinkOverlay>
-                  </Heading>
-                  <Stack mt={5} direction={["column", "row", "row", "row"]}>
-                    <Tag minW="78px">
-                      <TagLeftIcon boxSize="12px" as={CalendarIcon} />
-                      <TagLabel>日時</TagLabel>
-                    </Tag>
-                    <Text ml={3}>2022年7月23日(土) 9時～15時</Text>
-                  </Stack>
-                  <Stack mt={5} direction={["column", "row", "row", "row"]}>
-                    <Tag minW="50px">
-                      <TagLabel>場所</TagLabel>
-                    </Tag>
-                    <Text ml={3}>
-                      「愛知森林管理事務所森林交流館の奥の建物」瀬戸川平町１
-                    </Text>
-                  </Stack>
-                  <Text ml={5} mt={5}>
-                    第15回里山学校「森林環境学習と体験」を開催します。横笛つくりや巣箱づくり「森林の生態系保全」学習や森林内体験と観察を行います。ぜひご参加ください。
-                  </Text>
-                </Box>
-              </Stack>
-            </LinkBox>
+            <Alert
+              status="info"
+              variant="subtle"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              textAlign="center"
+              height="200px"
+            >
+              <AlertIcon boxSize="40px" mr={0} />
+              <AlertTitle mt={4} mb={1} fontSize="lg">
+                お知らせ
+              </AlertTitle>
+              <AlertDescription maxWidth="sm">
+                現在開催予定のイベントはありません。
+              </AlertDescription>
+            </Alert>
             <Heading mt={16} mb={5} fontSize={"4xl"} as="h2">
               過去のイベント
             </Heading>
